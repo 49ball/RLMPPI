@@ -1,0 +1,60 @@
+# environment
+task: car
+modality: 'state'
+action_repeat: 2
+discount: 0.99
+episode_length: 1000/${action_repeat}
+train_steps: 3000000/${action_repeat}
+
+
+# planning
+iterations: 8
+num_samples: 512
+num_elites: 64 #가장 reward 높은 action 개수
+mixture_coef: 0.05
+min_std: 0.05 #minimum standard deviation
+temperature: 0.5
+momentum: 0.1
+
+# learning
+batch_size: 512
+max_buffer_size: 1000000
+horizon: 20 #길면길수록 보수적, 속도가 낮을수록 멀리 봐야하고 속도가 높을수록 빨리 봐야함
+reward_coef: 0.5
+value_coef: 0.1
+consistency_coef: 2
+rho: 0.5
+kappa: 0.1
+lr: 1e-3
+std_schedule: linear(0.5, ${min_std}, 25000)
+horizon_schedule: linear(1, ${horizon}, 25000)
+per_alpha: 0.6
+per_beta: 0.4
+grad_clip_norm: 10
+seed_steps: 5000
+update_freq: 2
+tau: 0.01
+
+# architecture
+mlp_dim: 512
+state_dim: 4
+
+# wandb (insert your own)
+use_wandb: true
+wandb_project: "tdmpc_car" #project name
+wandb_entity: "49ball-Seoul National University" #team project name
+
+# mis(miscellaneous))
+seed: 1
+exp_name: default
+eval_freq: 100000
+eval_episodes: 10
+save_video: true
+save_model: true
+
+#car spec
+wheelbase: 2.5  
+car_length: 3.0 
+car_width: 1.5
+max_steer: 0.6981  # 최대 조향각(30도의 라디안 값)
+dt: 0.1 
