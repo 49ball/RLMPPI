@@ -1,0 +1,20 @@
+[34m[1mLogs will be synced with wandb.
+> /home/jeongtae/RLMPPI/src/algorithm/helper.py(263)add()
+-> if self._full:
+tensor([8.5864, 8.5977, 8.6038,  ..., 0.0000, 0.0000, 0.0000], device='cuda:0')
+Traceback (most recent call last):
+  File "train.py", line 109, in <module>
+    train(parse_cfg(Path().cwd() / __CONFIG__))
+  File "train.py", line 71, in train
+    buffer += episode
+  File "/home/jeongtae/RLMPPI/src/algorithm/helper.py", line 242, in __add__
+    self.add(episode)
+  File "/home/jeongtae/RLMPPI/src/algorithm/helper.py", line 263, in add
+    max_priority = self._priorities.max().to(self.device).item()
+  File "/home/jeongtae/RLMPPI/src/algorithm/helper.py", line 263, in add
+    max_priority = self._priorities.max().to(self.device).item()
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/bdb.py", line 88, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/bdb.py", line 113, in dispatch_line
+    if self.quitting: raise BdbQuit
+bdb.BdbQuit

@@ -1,0 +1,12 @@
+
+[34m[1mLogs will be synced with wandb.
+Traceback (most recent call last):
+  File "train.py", line 110, in <module>
+    train(parse_cfg(Path().cwd() / __CONFIG__))
+  File "train.py", line 71, in train
+    buffer += episode
+  File "/home/jeongtae/RLMPPI/src/algorithm/helper.py", line 242, in __add__
+    self.add(episode)
+  File "/home/jeongtae/RLMPPI/src/algorithm/helper.py", line 246, in add
+    self._s[self.idx:self.idx+self.cfg.episode_length] = episode.s[:-1] if self.cfg.modality == 'state' else episode.s[:-1, -3:]
+RuntimeError: The expanded size of the tensor (500) must match the existing size (22) at non-singleton dimension 0.  Target sizes: [500, 4].  Tensor sizes: [22, 4]

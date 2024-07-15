@@ -1,0 +1,29 @@
+
+[34m[1mLogs will be synced with wandb.
+ [34mtrain[39m   [30mE:[39m 1                [30mS:[39m 0                [30mR:[39m -2075.2          [30mT:[39m 0:00:01
+Traceback (most recent call last):
+  File "train.py", line 109, in <module>
+    train(parse_cfg(Path().cwd() / __CONFIG__))
+  File "train.py", line 93, in train
+    common_metrics['episode_reward'] = evaluate(env, agent, cfg.eval_episodes, step, eval_numbering)
+  File "train.py", line 34, in evaluate
+    action = agent.plan(s, eval_mode=True, step=step, t0=t==0)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/jeongtae/RLMPPI/src/algorithm/tdmpc.py", line 126, in plan
+    elite_idxs = torch.topk(value.squeeze(1), self.cfg.num_elites, dim=0).indices #reward 가장 높은 k개의 action 뽑기
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/omegaconf/dictconfig.py", line 351, in __getattr__
+    return self._get_impl(
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/omegaconf/dictconfig.py", line 451, in _get_impl
+    return self._resolve_with_default(
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/omegaconf/basecontainer.py", line 98, in _resolve_with_default
+    resolved_node = self._maybe_resolve_interpolation(
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/omegaconf/base.py", line 714, in _maybe_resolve_interpolation
+    value_kind = get_value_kind(value)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/omegaconf/_utils.py", line 558, in get_value_kind
+    if _is_missing_value(value):
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/omegaconf/_utils.py", line 511, in _is_missing_value
+    if isinstance(value, Node):
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/abc.py", line 98, in __instancecheck__
+    return _abc_instancecheck(cls, instance)
+KeyboardInterrupt

@@ -1,0 +1,92 @@
+2024-07-11 22:18:23,022 INFO    StreamThr :3442335 [internal.py:wandb_internal():85] W&B internal server running at pid: 3442335, started at: 2024-07-11 22:18:23.021427
+2024-07-11 22:18:23,023 DEBUG   HandlerThread:3442335 [handler.py:handle_request():158] handle_request: status
+2024-07-11 22:18:23,025 INFO    WriterThread:3442335 [datastore.py:open_for_write():87] open: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240711_221823-bkfxpy4g/run-bkfxpy4g.wandb
+2024-07-11 22:18:23,025 DEBUG   SenderThread:3442335 [sender.py:send():379] send: header
+2024-07-11 22:18:23,026 DEBUG   SenderThread:3442335 [sender.py:send():379] send: run
+2024-07-11 22:18:28,027 DEBUG   HandlerThread:3442335 [handler.py:handle_request():158] handle_request: keepalive
+2024-07-11 22:18:33,028 DEBUG   HandlerThread:3442335 [handler.py:handle_request():158] handle_request: keepalive
+2024-07-11 22:18:38,029 DEBUG   HandlerThread:3442335 [handler.py:handle_request():158] handle_request: keepalive
+2024-07-11 22:18:43,030 DEBUG   HandlerThread:3442335 [handler.py:handle_request():158] handle_request: keepalive
+2024-07-11 22:18:48,031 DEBUG   HandlerThread:3442335 [handler.py:handle_request():158] handle_request: keepalive
+2024-07-11 22:18:53,032 DEBUG   HandlerThread:3442335 [handler.py:handle_request():158] handle_request: keepalive
+2024-07-11 22:18:58,033 DEBUG   HandlerThread:3442335 [handler.py:handle_request():158] handle_request: keepalive
+2024-07-11 22:19:02,383 ERROR   SenderThread:3442335 [internal_api.py:execute():344] 409 response executing GraphQL.
+2024-07-11 22:19:02,384 ERROR   SenderThread:3442335 [internal_api.py:execute():345] {"errors":[{"message":"Error 1062 (23000): Duplicate entry '39623972-bkfxpy4g' for key 'runs.PRIMARY'","path":["upsertBucket"]}],"data":{"upsertBucket":null}}
+2024-07-11 22:19:03,034 DEBUG   HandlerThread:3442335 [handler.py:handle_request():158] handle_request: keepalive
+2024-07-11 22:19:08,035 DEBUG   HandlerThread:3442335 [handler.py:handle_request():158] handle_request: keepalive
+2024-07-11 22:19:13,036 DEBUG   HandlerThread:3442335 [handler.py:handle_request():158] handle_request: keepalive
+2024-07-11 22:19:15,052 DEBUG   HandlerThread:3442335 [handler.py:handle_request():158] handle_request: shutdown
+2024-07-11 22:19:15,052 INFO    HandlerThread:3442335 [handler.py:finish():882] shutting down handler
+2024-07-11 22:19:16,033 INFO    WriterThread:3442335 [datastore.py:close():296] close: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240711_221823-bkfxpy4g/run-bkfxpy4g.wandb
+2024-07-11 22:19:24,524 INFO    SenderThread:3442335 [retry.py:__call__():172] Retry attempt failed:
+Traceback (most recent call last):
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/urllib3/connectionpool.py", line 536, in _make_request
+    response = conn.getresponse()
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/urllib3/connection.py", line 464, in getresponse
+    httplib_response = super().getresponse()
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/http/client.py", line 1348, in getresponse
+    response.begin()
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/http/client.py", line 316, in begin
+    version, status, reason = self._read_status()
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/http/client.py", line 277, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/socket.py", line 669, in readinto
+    return self._sock.recv_into(b)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/ssl.py", line 1274, in recv_into
+    return self.read(nbytes, buffer)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/ssl.py", line 1132, in read
+    return self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/requests/adapters.py", line 589, in send
+    resp = conn.urlopen(
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/urllib3/connectionpool.py", line 843, in urlopen
+    retries = retries.increment(
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/urllib3/util/retry.py", line 474, in increment
+    raise reraise(type(error), error, _stacktrace)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/urllib3/util/util.py", line 39, in reraise
+    raise value
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/urllib3/connectionpool.py", line 789, in urlopen
+    response = self._make_request(
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/urllib3/connectionpool.py", line 538, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/urllib3/connectionpool.py", line 369, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.wandb.ai', port=443): Read timed out. (read timeout=20)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/wandb/sdk/lib/retry.py", line 131, in __call__
+    result = self._call_fn(*args, **kwargs)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/wandb/sdk/internal/internal_api.py", line 340, in execute
+    return self.client.execute(*args, **kwargs)  # type: ignore
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/wandb/sdk/lib/gql_request.py", line 58, in execute
+    request = self.session.post(self.url, **post_args)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/requests/sessions.py", line 637, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/requests/adapters.py", line 635, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='api.wandb.ai', port=443): Read timed out. (read timeout=20)
+2024-07-11 22:19:34,894 INFO    SenderThread:3442335 [dir_watcher.py:__init__():211] watching files in: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240711_221823-bkfxpy4g/files
+2024-07-11 22:19:34,894 INFO    SenderThread:3442335 [sender.py:_start_run_threads():1188] run started: bkfxpy4g with start time 1720703903.021487
+2024-07-11 22:19:34,894 INFO    SenderThread:3442335 [sender.py:finish():1608] shutting down sender
+2024-07-11 22:19:34,894 INFO    SenderThread:3442335 [dir_watcher.py:finish():358] shutting down directory watcher
+2024-07-11 22:19:35,894 INFO    SenderThread:3442335 [dir_watcher.py:finish():388] scan: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240711_221823-bkfxpy4g/files
+2024-07-11 22:19:35,895 INFO    SenderThread:3442335 [dir_watcher.py:finish():402] scan save: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240711_221823-bkfxpy4g/files/config.yaml config.yaml
+2024-07-11 22:19:35,895 INFO    SenderThread:3442335 [file_pusher.py:finish():169] shutting down file pusher
+2024-07-11 22:19:35,895 INFO    SenderThread:3442335 [file_pusher.py:join():175] waiting for file pusher
+2024-07-11 22:19:41,612 INFO    wandb-upload_0:3442335 [upload_job.py:push():130] Uploaded file /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240711_221823-bkfxpy4g/files/config.yaml
+2024-07-11 22:19:41,902 INFO    SenderThread:3442335 [file_stream.py:finish():601] file stream finish called
+2024-07-11 22:19:42,495 INFO    SenderThread:3442335 [file_stream.py:finish():605] file stream finish is done

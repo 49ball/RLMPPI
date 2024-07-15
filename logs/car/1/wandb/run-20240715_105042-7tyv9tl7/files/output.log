@@ -1,0 +1,12 @@
+
+[34m[1mLogs will be synced with wandb.
+Traceback (most recent call last):
+  File "train.py", line 109, in <module>
+    train(parse_cfg(Path().cwd() / __CONFIG__))
+  File "train.py", line 63, in train
+    s, reward, done, _ = env.step(action.cpu().numpy()) #다음 state, reward, 끝났는지 확인 ->step으로 episode가 done 이 될때까지!!!!!!!!!!!!!!!!!
+  File "/home/jeongtae/RLMPPI/src/environment.py", line 107, in step
+    reward,done =self.map.calculate_reward(self.state)
+  File "/home/jeongtae/RLMPPI/src/environment.py", line 63, in calculate_reward
+    obs_x = obstacles[:, 0].view(1, -1)
+IndexError: too many indices for tensor of dimension 1

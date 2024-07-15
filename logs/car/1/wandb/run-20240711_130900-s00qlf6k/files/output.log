@@ -1,0 +1,37 @@
+[34m[1mLogs will be synced with wandb.
+ [34mtrain[39m   [30mE:[39m 1                [30mS:[39m 0                [30mR:[39m 150.7            [30mT:[39m 0:00:00
+ [32meval[39m    [30mE:[39m 1                [30mS:[39m 0                [30mR:[39m 1805.7           [30mT:[39m 0:00:00
+ [34mtrain[39m   [30mE:[39m 2                [30mS:[39m 1,000            [30mR:[39m 5698.5           [30mT:[39m 0:00:04
+ [34mtrain[39m   [30mE:[39m 3                [30mS:[39m 2,000            [30mR:[39m -21.4            [30mT:[39m 0:00:04
+ [34mtrain[39m   [30mE:[39m 4                [30mS:[39m 3,000            [30mR:[39m 21.5             [30mT:[39m 0:00:04
+ [34mtrain[39m   [30mE:[39m 5                [30mS:[39m 4,000            [30mR:[39m -4.2             [30mT:[39m 0:00:04
+ [34mtrain[39m   [30mE:[39m 6                [30mS:[39m 5,000            [30mR:[39m -30.0            [30mT:[39m 0:00:04
+ [34mtrain[39m   [30mE:[39m 7                [30mS:[39m 6,000            [30mR:[39m 6150.5           [30mT:[39m 0:00:04
+ [34mtrain[39m   [30mE:[39m 8                [30mS:[39m 7,000            [30mR:[39m 107.8            [30mT:[39m 0:00:05
+ [34mtrain[39m   [30mE:[39m 9                [30mS:[39m 8,000            [30mR:[39m -30.0            [30mT:[39m 0:00:05
+ [34mtrain[39m   [30mE:[39m 10               [30mS:[39m 9,000            [30mR:[39m 21.5             [30mT:[39m 0:00:05
+Traceback (most recent call last):
+  File "train.py", line 109, in <module>
+  File "train.py", line 77, in train
+    'episode': episode_idx,
+  File "/home/jeongtae/RLMPPI/src/algorithm/tdmpc.py", line 189, in update
+    td_target = self._td_target(next_ses[t], reward[t]) #다음 step의 td target을 계산함
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/jeongtae/RLMPPI/src/algorithm/tdmpc.py", line 169, in _td_target
+    torch.min(*self.model_target.Q(next_ss, self.model.pi(next_ss, self.cfg.min_std))) #reward+감가율*value(target model에서 encoding 된 obs와 action)
+  File "/home/jeongtae/RLMPPI/src/algorithm/tdmpc.py", line 34, in pi
+    mu = torch.tanh(self._pi(s))
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/torch/nn/modules/container.py", line 217, in forward
+    input = module(input)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/torch/nn/modules/linear.py", line 116, in forward
+    return F.linear(input, self.weight, self.bias)
+KeyboardInterrupt

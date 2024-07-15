@@ -1,0 +1,29 @@
+2024-07-12 15:04:38,857 INFO    MainThread:4157990 [wandb_setup.py:_flush():76] Current SDK version is 0.17.3
+2024-07-12 15:04:38,857 INFO    MainThread:4157990 [wandb_setup.py:_flush():76] Configure stats pid to 4157990
+2024-07-12 15:04:38,857 INFO    MainThread:4157990 [wandb_setup.py:_flush():76] Loading settings from /home/jeongtae/.config/wandb/settings
+2024-07-12 15:04:38,857 INFO    MainThread:4157990 [wandb_setup.py:_flush():76] Loading settings from /home/jeongtae/RLMPPI/src/wandb/settings
+2024-07-12 15:04:38,857 INFO    MainThread:4157990 [wandb_setup.py:_flush():76] Loading settings from environment variables: {'silent': 'true'}
+2024-07-12 15:04:38,858 INFO    MainThread:4157990 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-07-12 15:04:38,858 INFO    MainThread:4157990 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'train.py', 'program_abspath': '/home/jeongtae/RLMPPI/src/train.py', 'program': 'train.py'}
+2024-07-12 15:04:38,858 INFO    MainThread:4157990 [wandb_setup.py:_flush():76] Applying login settings: {}
+2024-07-12 15:04:38,858 INFO    MainThread:4157990 [wandb_init.py:_log_setup():520] Logging user logs to /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240712_150438-kon4u716/logs/debug.log
+2024-07-12 15:04:38,858 INFO    MainThread:4157990 [wandb_init.py:_log_setup():521] Logging internal logs to /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240712_150438-kon4u716/logs/debug-internal.log
+2024-07-12 15:04:38,858 INFO    MainThread:4157990 [wandb_init.py:init():560] calling init triggers
+2024-07-12 15:04:38,858 INFO    MainThread:4157990 [wandb_init.py:init():567] wandb.init called with sweep_config: {}
+config: {'task': 'car', 'modality': 'state', 'action_repeat': 2, 'discount': 0.99, 'episode_length': 500, 'train_steps': 1500000, 'iterations': 8, 'num_samples': 512, 'num_elites': 64, 'mixture_coef': 0.05, 'min_std': 0.05, 'temperature': 0.5, 'momentum': 0.1, 'batch_size': 512, 'max_buffer_size': 1000000, 'horizon': 20, 'reward_coef': 0.5, 'value_coef': 0.1, 'consistency_coef': 2, 'rho': 0.5, 'kappa': 0.1, 'lr': 0.001, 'std_schedule': 'linear(0.5, 0.05, 25000)', 'horizon_schedule': 'linear(1, 20, 25000)', 'per_alpha': 0.6, 'per_beta': 0.4, 'grad_clip_norm': 10, 'seed_steps': 5000, 'update_freq': 2, 'tau': 0.01, 'mlp_dim': 512, 'state_dim': 4, 'use_wandb': True, 'wandb_project': 'tdmpc_car', 'wandb_entity': '49ball-Seoul National University', 'seed': 1, 'exp_name': 'default', 'eval_freq': 100000, 'eval_episodes': 10, 'save_video': True, 'save_model': True, 'wheelbase': 2.5, 'car_length': 3.0, 'car_width': 1.5, 'max_steer': 0.6981, 'dt': 0.1, 'task_title': 'Car', 'device': 'cuda', 's_shape': [4], 'action_shape': [2], 'action_dim': 2}
+2024-07-12 15:04:38,858 INFO    MainThread:4157990 [wandb_init.py:init():610] starting backend
+2024-07-12 15:04:38,858 INFO    MainThread:4157990 [wandb_init.py:init():614] setting up manager
+2024-07-12 15:04:38,861 INFO    MainThread:4157990 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2024-07-12 15:04:38,862 INFO    MainThread:4157990 [wandb_init.py:init():622] backend started and connected
+2024-07-12 15:04:38,871 INFO    MainThread:4157990 [wandb_init.py:init():711] updated telemetry
+2024-07-12 15:04:38,871 INFO    MainThread:4157990 [wandb_init.py:init():744] communicating run to backend with 90.0 second timeout
+2024-07-12 15:04:39,401 INFO    MainThread:4157990 [wandb_run.py:_on_init():2402] communicating current version
+2024-07-12 15:04:39,445 INFO    MainThread:4157990 [wandb_run.py:_on_init():2411] got version response upgrade_message: "wandb version 0.17.4 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2024-07-12 15:04:39,445 INFO    MainThread:4157990 [wandb_init.py:init():795] starting run threads in backend
+2024-07-12 15:04:40,751 INFO    MainThread:4157990 [wandb_run.py:_console_start():2380] atexit reg
+2024-07-12 15:04:40,751 INFO    MainThread:4157990 [wandb_run.py:_redirect():2235] redirect: wrap_raw
+2024-07-12 15:04:40,751 INFO    MainThread:4157990 [wandb_run.py:_redirect():2300] Wrapping output streams.
+2024-07-12 15:04:40,751 INFO    MainThread:4157990 [wandb_run.py:_redirect():2325] Redirects installed.
+2024-07-12 15:04:40,752 INFO    MainThread:4157990 [wandb_init.py:init():838] run started, returning control to user process
+2024-07-14 00:25:24,149 WARNING MsgRouterThr:4157990 [router.py:message_loop():77] message_loop has been closed

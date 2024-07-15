@@ -1,0 +1,179 @@
+2024-07-11 12:23:46,609 INFO    StreamThr :3033485 [internal.py:wandb_internal():85] W&B internal server running at pid: 3033485, started at: 2024-07-11 12:23:46.609419
+2024-07-11 12:23:46,610 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: status
+2024-07-11 12:23:46,617 INFO    WriterThread:3033485 [datastore.py:open_for_write():87] open: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240711_122346-ea5ux59x/run-ea5ux59x.wandb
+2024-07-11 12:23:46,618 DEBUG   SenderThread:3033485 [sender.py:send():379] send: header
+2024-07-11 12:23:46,618 DEBUG   SenderThread:3033485 [sender.py:send():379] send: run
+2024-07-11 12:23:47,160 INFO    SenderThread:3033485 [dir_watcher.py:__init__():211] watching files in: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240711_122346-ea5ux59x/files
+2024-07-11 12:23:47,161 INFO    SenderThread:3033485 [sender.py:_start_run_threads():1188] run started: ea5ux59x with start time 1720668226.609636
+2024-07-11 12:23:47,171 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: check_version
+2024-07-11 12:23:47,172 DEBUG   SenderThread:3033485 [sender.py:send_request():406] send_request: check_version
+2024-07-11 12:23:47,235 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: run_start
+2024-07-11 12:23:47,244 DEBUG   HandlerThread:3033485 [system_info.py:__init__():26] System info init
+2024-07-11 12:23:47,244 DEBUG   HandlerThread:3033485 [system_info.py:__init__():41] System info init done
+2024-07-11 12:23:47,244 INFO    HandlerThread:3033485 [system_monitor.py:start():194] Starting system monitor
+2024-07-11 12:23:47,244 INFO    SystemMonitor:3033485 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-07-11 12:23:47,245 INFO    HandlerThread:3033485 [system_monitor.py:probe():214] Collecting system info
+2024-07-11 12:23:47,245 INFO    SystemMonitor:3033485 [interfaces.py:start():188] Started cpu monitoring
+2024-07-11 12:23:47,246 INFO    SystemMonitor:3033485 [interfaces.py:start():188] Started disk monitoring
+2024-07-11 12:23:47,247 INFO    SystemMonitor:3033485 [interfaces.py:start():188] Started gpu monitoring
+2024-07-11 12:23:47,247 INFO    SystemMonitor:3033485 [interfaces.py:start():188] Started memory monitoring
+2024-07-11 12:23:47,247 INFO    SystemMonitor:3033485 [interfaces.py:start():188] Started network monitoring
+2024-07-11 12:23:47,255 DEBUG   HandlerThread:3033485 [system_info.py:probe():152] Probing system
+2024-07-11 12:23:47,258 DEBUG   HandlerThread:3033485 [gitlib.py:_init_repo():56] git repository is invalid
+2024-07-11 12:23:47,259 DEBUG   HandlerThread:3033485 [system_info.py:probe():200] Probing system done
+2024-07-11 12:23:47,259 DEBUG   HandlerThread:3033485 [system_monitor.py:probe():223] {'os': 'Linux-6.5.0-41-generic-x86_64-with-glibc2.17', 'python': '3.8.19', 'heartbeatAt': '2024-07-11T03:23:47.255302', 'startedAt': '2024-07-11T03:23:46.601076', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': 'train.py', 'codePathLocal': 'train.py', 'codePath': 'train.py', 'host': 'jeongtae-B760MZ-E-PRO', 'username': 'jeongtae', 'executable': '/home/jeongtae/anaconda3/envs/RLMPPI/bin/python3', 'cpu_count': 16, 'cpu_count_logical': 24, 'cpu_freq': {'current': 1360.4777083333333, 'min': 800.0, 'max': 4783.333333333333}, 'cpu_freq_per_core': [{'current': 1791.349, 'min': 800.0, 'max': 5100.0}, {'current': 2150.379, 'min': 800.0, 'max': 5100.0}, {'current': 1963.761, 'min': 800.0, 'max': 5100.0}, {'current': 800.0, 'min': 800.0, 'max': 5100.0}, {'current': 1865.726, 'min': 800.0, 'max': 5100.0}, {'current': 800.0, 'min': 800.0, 'max': 5100.0}, {'current': 2197.708, 'min': 800.0, 'max': 5100.0}, {'current': 1556.419, 'min': 800.0, 'max': 5100.0}, {'current': 2151.88, 'min': 800.0, 'max': 5200.0}, {'current': 800.0, 'min': 800.0, 'max': 5200.0}, {'current': 2274.647, 'min': 800.0, 'max': 5200.0}, {'current': 2132.333, 'min': 800.0, 'max': 5200.0}, {'current': 2146.607, 'min': 800.0, 'max': 5100.0}, {'current': 800.0, 'min': 800.0, 'max': 5100.0}, {'current': 1631.372, 'min': 800.0, 'max': 5100.0}, {'current': 800.0, 'min': 800.0, 'max': 5100.0}, {'current': 869.747, 'min': 800.0, 'max': 4100.0}, {'current': 799.343, 'min': 800.0, 'max': 4100.0}, {'current': 800.0, 'min': 800.0, 'max': 4100.0}, {'current': 800.0, 'min': 800.0, 'max': 4100.0}, {'current': 800.0, 'min': 800.0, 'max': 4100.0}, {'current': 1634.887, 'min': 800.0, 'max': 4100.0}, {'current': 800.0, 'min': 800.0, 'max': 4100.0}, {'current': 800.0, 'min': 800.0, 'max': 4100.0}], 'disk': {'/': {'total': 491.082275390625, 'used': 314.1856002807617}}, 'gpu': 'NVIDIA GeForce RTX 3060', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 3060', 'memory_total': 12884901888}], 'memory': {'total': 31.111347198486328}}
+2024-07-11 12:23:47,259 INFO    HandlerThread:3033485 [system_monitor.py:probe():224] Finished collecting system info
+2024-07-11 12:23:47,259 INFO    HandlerThread:3033485 [system_monitor.py:probe():227] Publishing system info
+2024-07-11 12:23:47,259 DEBUG   HandlerThread:3033485 [system_info.py:_save_conda():209] Saving list of conda packages installed into the current environment
+2024-07-11 12:23:48,161 INFO    Thread-12 :3033485 [dir_watcher.py:_on_file_created():271] file/dir created: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240711_122346-ea5ux59x/files/conda-environment.yaml
+2024-07-11 12:23:48,376 DEBUG   HandlerThread:3033485 [system_info.py:_save_conda():224] Saving conda packages done
+2024-07-11 12:23:48,377 INFO    HandlerThread:3033485 [system_monitor.py:probe():229] Finished publishing system info
+2024-07-11 12:23:48,380 DEBUG   SenderThread:3033485 [sender.py:send():379] send: files
+2024-07-11 12:23:48,380 INFO    SenderThread:3033485 [sender.py:_save_file():1454] saving file wandb-metadata.json with policy now
+2024-07-11 12:23:48,428 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: python_packages
+2024-07-11 12:23:48,429 DEBUG   SenderThread:3033485 [sender.py:send_request():406] send_request: python_packages
+2024-07-11 12:23:48,429 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: stop_status
+2024-07-11 12:23:48,429 DEBUG   SenderThread:3033485 [sender.py:send_request():406] send_request: stop_status
+2024-07-11 12:23:48,430 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:23:48,748 DEBUG   SenderThread:3033485 [sender.py:send():379] send: telemetry
+2024-07-11 12:23:49,098 INFO    wandb-upload_0:3033485 [upload_job.py:push():130] Uploaded file /tmp/tmpjcqz_peiwandb/pvp7hqdr-wandb-metadata.json
+2024-07-11 12:23:49,161 INFO    Thread-12 :3033485 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240711_122346-ea5ux59x/files/conda-environment.yaml
+2024-07-11 12:23:49,161 INFO    Thread-12 :3033485 [dir_watcher.py:_on_file_created():271] file/dir created: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240711_122346-ea5ux59x/files/output.log
+2024-07-11 12:23:49,161 INFO    Thread-12 :3033485 [dir_watcher.py:_on_file_created():271] file/dir created: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240711_122346-ea5ux59x/files/wandb-metadata.json
+2024-07-11 12:23:49,161 INFO    Thread-12 :3033485 [dir_watcher.py:_on_file_created():271] file/dir created: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240711_122346-ea5ux59x/files/requirements.txt
+2024-07-11 12:23:49,429 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:23:50,429 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:23:51,162 INFO    Thread-12 :3033485 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240711_122346-ea5ux59x/files/output.log
+2024-07-11 12:23:51,429 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:23:51,749 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: status_report
+2024-07-11 12:23:52,429 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:23:53,429 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:23:54,429 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:23:55,430 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:23:56,430 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:23:57,430 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: status_report
+2024-07-11 12:23:57,430 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:23:58,430 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:23:59,430 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:00,430 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:01,431 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:02,430 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: status_report
+2024-07-11 12:24:02,431 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:03,429 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: stop_status
+2024-07-11 12:24:03,429 DEBUG   SenderThread:3033485 [sender.py:send_request():406] send_request: stop_status
+2024-07-11 12:24:03,472 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:04,431 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:05,431 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:06,431 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:07,432 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:07,681 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: status_report
+2024-07-11 12:24:08,432 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:09,432 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:10,432 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:10,963 ERROR   FileStreamThread:3033485 [file_stream.py:_handle_response():510] dropped chunk 404 Client Error: Not Found for url: https://api.wandb.ai/files/49ball-Seoul%20National%20University/tdmpc_car/ea5ux59x/file_stream
+NoneType: None
+2024-07-11 12:24:11,169 INFO    Thread-12 :3033485 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240711_122346-ea5ux59x/files/output.log
+2024-07-11 12:24:11,432 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:12,433 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:12,969 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: status_report
+2024-07-11 12:24:13,432 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:14,433 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:15,433 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:16,433 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:17,433 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:18,429 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: stop_status
+2024-07-11 12:24:18,430 DEBUG   SenderThread:3033485 [sender.py:send_request():406] send_request: stop_status
+2024-07-11 12:24:18,472 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:18,649 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: status_report
+2024-07-11 12:24:18,840 ERROR   SenderThread:3033485 [internal_api.py:execute():344] 409 response executing GraphQL.
+2024-07-11 12:24:18,840 ERROR   SenderThread:3033485 [internal_api.py:execute():345] {"errors":[{"message":"run ea5ux59x was previously created and deleted; try a new run name","path":["upsertBucket"]}],"data":{"upsertBucket":null}}
+2024-07-11 12:24:19,434 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:20,060 ERROR   SenderThread:3033485 [internal_api.py:execute():344] 409 response executing GraphQL.
+2024-07-11 12:24:20,060 ERROR   SenderThread:3033485 [internal_api.py:execute():345] {"errors":[{"message":"run ea5ux59x was previously created and deleted; try a new run name","path":["upsertBucket"]}],"data":{"upsertBucket":null}}
+2024-07-11 12:24:20,434 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:21,434 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:22,434 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:22,641 ERROR   SenderThread:3033485 [internal_api.py:execute():344] 409 response executing GraphQL.
+2024-07-11 12:24:22,641 ERROR   SenderThread:3033485 [internal_api.py:execute():345] {"errors":[{"message":"run ea5ux59x was previously created and deleted; try a new run name","path":["upsertBucket"]}],"data":{"upsertBucket":null}}
+2024-07-11 12:24:22,641 INFO    SenderThread:3033485 [retry.py:__call__():172] Retry attempt failed:
+Traceback (most recent call last):
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/wandb/sdk/lib/retry.py", line 131, in __call__
+    result = self._call_fn(*args, **kwargs)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/wandb/sdk/internal/internal_api.py", line 340, in execute
+    return self.client.execute(*args, **kwargs)  # type: ignore
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/wandb/sdk/lib/gql_request.py", line 59, in execute
+    request.raise_for_status()
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/requests/models.py", line 1024, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 409 Client Error: Conflict for url: https://api.wandb.ai/graphql
+2024-07-11 12:24:23,434 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:24,434 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-11 12:24:26,402 DEBUG   HandlerThread:3033485 [handler.py:handle_request():158] handle_request: poll_exit
+2024-07-11 12:24:27,055 ERROR   SenderThread:3033485 [internal_api.py:execute():344] 409 response executing GraphQL.
+2024-07-11 12:24:27,056 ERROR   SenderThread:3033485 [internal_api.py:execute():345] {"errors":[{"message":"run ea5ux59x was previously created and deleted; try a new run name","path":["upsertBucket"]}],"data":{"upsertBucket":null}}
+2024-07-11 12:24:27,256 INFO    memory    :3033485 [interfaces.py:monitor():138] Process proc.memory.rssMB has exited.
+2024-07-11 12:24:27,257 DEBUG   SystemMonitor:3033485 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-07-11 12:24:27,257 DEBUG   SystemMonitor:3033485 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2024-07-11 12:24:27,257 DEBUG   SystemMonitor:3033485 [system_monitor.py:_start():183] Publishing last batch of metrics
+2024-07-11 12:24:27,653 WARNING StreamThr :3033485 [internal.py:is_dead():413] Internal process exiting, parent pid 3033427 disappeared
+2024-07-11 12:24:27,653 ERROR   StreamThr :3033485 [internal.py:wandb_internal():151] Internal process shutdown.
+2024-07-11 12:24:28,257 INFO    HandlerThread:3033485 [handler.py:finish():882] shutting down handler
+2024-07-11 12:24:28,258 INFO    HandlerThread:3033485 [system_monitor.py:finish():203] Stopping system monitor
+2024-07-11 12:24:28,258 INFO    HandlerThread:3033485 [interfaces.py:finish():200] Joined cpu monitor
+2024-07-11 12:24:28,258 INFO    HandlerThread:3033485 [interfaces.py:finish():200] Joined disk monitor
+2024-07-11 12:24:28,258 INFO    HandlerThread:3033485 [interfaces.py:finish():200] Joined gpu monitor
+2024-07-11 12:24:28,258 INFO    HandlerThread:3033485 [interfaces.py:finish():200] Joined memory monitor
+2024-07-11 12:24:28,258 INFO    HandlerThread:3033485 [interfaces.py:finish():200] Joined network monitor
+2024-07-11 12:24:28,258 INFO    WriterThread:3033485 [datastore.py:close():296] close: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240711_122346-ea5ux59x/run-ea5ux59x.wandb
+2024-07-11 12:24:37,187 ERROR   SenderThread:3033485 [internal_api.py:execute():344] 409 response executing GraphQL.
+2024-07-11 12:24:37,187 ERROR   SenderThread:3033485 [internal_api.py:execute():345] {"errors":[{"message":"run ea5ux59x was previously created and deleted; try a new run name","path":["upsertBucket"]}],"data":{"upsertBucket":null}}
+2024-07-11 12:24:54,513 ERROR   SenderThread:3033485 [internal_api.py:execute():344] 409 response executing GraphQL.
+2024-07-11 12:24:54,513 ERROR   SenderThread:3033485 [internal_api.py:execute():345] {"errors":[{"message":"run ea5ux59x was previously created and deleted; try a new run name","path":["upsertBucket"]}],"data":{"upsertBucket":null}}
+2024-07-11 12:25:33,899 ERROR   SenderThread:3033485 [internal_api.py:execute():344] 409 response executing GraphQL.
+2024-07-11 12:25:33,899 ERROR   SenderThread:3033485 [internal_api.py:execute():345] {"errors":[{"message":"run ea5ux59x was previously created and deleted; try a new run name","path":["upsertBucket"]}],"data":{"upsertBucket":null}}
+2024-07-11 12:26:53,740 ERROR   SenderThread:3033485 [internal_api.py:execute():344] 409 response executing GraphQL.
+2024-07-11 12:26:53,740 ERROR   SenderThread:3033485 [internal_api.py:execute():345] {"errors":[{"message":"run ea5ux59x was previously created and deleted; try a new run name","path":["upsertBucket"]}],"data":{"upsertBucket":null}}
+2024-07-11 12:26:53,741 ERROR   StreamThr :3033485 [internal.py:wandb_internal():173] Thread SenderThread:
+Traceback (most recent call last):
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/wandb/apis/normalize.py", line 41, in wrapper
+    return func(*args, **kwargs)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/wandb/sdk/internal/internal_api.py", line 2190, in upsert_run
+    response = self.gql(
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/wandb/sdk/internal/internal_api.py", line 312, in gql
+    ret = self._retry_gql(
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/wandb/sdk/lib/retry.py", line 131, in __call__
+    result = self._call_fn(*args, **kwargs)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/wandb/sdk/internal/internal_api.py", line 340, in execute
+    return self.client.execute(*args, **kwargs)  # type: ignore
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/wandb/sdk/lib/gql_request.py", line 59, in execute
+    request.raise_for_status()
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/requests/models.py", line 1024, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 409 Client Error: Conflict for url: https://api.wandb.ai/graphql
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/wandb/sdk/internal/internal_util.py", line 48, in run
+    self._run()
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/wandb/sdk/internal/internal_util.py", line 92, in _run
+    self._debounce()
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/wandb/sdk/internal/internal.py", line 333, in _debounce
+    self._sm.debounce()
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/wandb/sdk/internal/sender.py", line 537, in debounce
+    self._maybe_update_config(always=final)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/wandb/sdk/internal/sender.py", line 514, in _maybe_update_config
+    self._debounce_config()
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/wandb/sdk/internal/sender.py", line 543, in _debounce_config
+    self._api.upsert_run(
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/wandb/apis/normalize.py", line 51, in wrapper
+    raise CommError(message, error)
+wandb.errors.CommError: run ea5ux59x was previously created and deleted; try a new run name (Error 409: Conflict)

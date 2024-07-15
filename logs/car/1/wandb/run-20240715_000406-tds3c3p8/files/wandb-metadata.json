@@ -1,0 +1,162 @@
+{
+    "os": "Linux-6.5.0-41-generic-x86_64-with-glibc2.17",
+    "python": "3.8.19",
+    "heartbeatAt": "2024-07-14T15:04:07.089904",
+    "startedAt": "2024-07-14T15:04:06.432267",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "train.py",
+    "codePathLocal": "train.py",
+    "codePath": "train.py",
+    "host": "jeongtae-B760MZ-E-PRO",
+    "username": "jeongtae",
+    "executable": "/home/jeongtae/anaconda3/envs/RLMPPI/bin/python3",
+    "cpu_count": 16,
+    "cpu_count_logical": 24,
+    "cpu_freq": {
+        "current": 1500.5063749999997,
+        "min": 800.0,
+        "max": 1900.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2100.0,
+            "min": 800.0,
+            "max": 2100.0
+        },
+        {
+            "current": 2100.0,
+            "min": 800.0,
+            "max": 2100.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 2100.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 2100.0
+        },
+        {
+            "current": 1459.463,
+            "min": 800.0,
+            "max": 2100.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 2100.0
+        },
+        {
+            "current": 1643.141,
+            "min": 800.0,
+            "max": 2100.0
+        },
+        {
+            "current": 1640.632,
+            "min": 800.0,
+            "max": 2100.0
+        },
+        {
+            "current": 2057.312,
+            "min": 800.0,
+            "max": 2100.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 2100.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 2100.0
+        },
+        {
+            "current": 2091.159,
+            "min": 800.0,
+            "max": 2100.0
+        },
+        {
+            "current": 1962.259,
+            "min": 800.0,
+            "max": 2100.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 2100.0
+        },
+        {
+            "current": 2097.375,
+            "min": 800.0,
+            "max": 2100.0
+        },
+        {
+            "current": 2102.176,
+            "min": 800.0,
+            "max": 2100.0
+        },
+        {
+            "current": 800.549,
+            "min": 800.0,
+            "max": 1500.0
+        },
+        {
+            "current": 1500.975,
+            "min": 800.0,
+            "max": 1500.0
+        },
+        {
+            "current": 800.197,
+            "min": 800.0,
+            "max": 1500.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 1500.0
+        },
+        {
+            "current": 1269.187,
+            "min": 800.0,
+            "max": 1500.0
+        },
+        {
+            "current": 796.501,
+            "min": 800.0,
+            "max": 1500.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 1500.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 1500.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 491.082275390625,
+            "used": 314.3426094055176
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 3060",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 3060",
+            "memory_total": 12884901888
+        }
+    ],
+    "memory": {
+        "total": 31.111347198486328
+    }
+}
