@@ -26,3 +26,4 @@ config: {'task': 'car', 'modality': 'state', 'action_repeat': 2, 'discount': 0.9
 2024-07-15 13:09:48,390 INFO    MainThread:2827448 [wandb_run.py:_redirect():2300] Wrapping output streams.
 2024-07-15 13:09:48,390 INFO    MainThread:2827448 [wandb_run.py:_redirect():2325] Redirects installed.
 2024-07-15 13:09:48,391 INFO    MainThread:2827448 [wandb_init.py:init():838] run started, returning control to user process
+2024-07-15 13:32:15,440 WARNING MsgRouterThr:2827448 [router.py:message_loop():77] message_loop has been closed

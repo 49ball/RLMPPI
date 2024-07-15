@@ -8,11 +8,12 @@ train_steps: 3000000/${action_repeat}
 
 
 # planning
-iterations: 10
+iterations: 10 #iteration 많아지면 편향됨
 num_samples: 512
 num_elites: 64 #가장 reward 높은 action 개수 #너무 적으면 편향, 너무 많으면 학습 오래걸림
 mixture_coef: 0.05
 min_std: 0.05 #minimum standard deviation
+
 temperature: 0.5
 momentum: 0.1
 

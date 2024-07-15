@@ -76,11 +76,11 @@ class MapWithObstacles:
 
         if distance_to_goal <=0.5: #차가 목표지점에 도착했을때
             reward = torch.tensor(10.0, dtype=torch.float32, device='cuda')
-            #done = True
+            done = True
 
         elif torch.any(x <= 0) or torch.any(x >= 100) or torch.any(y <= 0) or torch.any(y >= 100): #차가 경계선 밖을 나갈때
             reward = torch.tensor(-5.0, dtype=torch.float32, device='cuda')
-            #done = True
+            done = True
         
         return reward.cpu().numpy().item(), done
 
@@ -128,7 +128,7 @@ def make_env(cfg):
     return env
 
 # map_with_obstacles = MapWithObstacles()
-# state = np.array([8, 8, 0, 0])
+# state = np.array([0, 0, 0, 0])
 # reward, done = map_with_obstacles.calculate_reward(state)
 # print(f"Reward for state {state} : {reward}, Done: {done}")
 

@@ -20,3 +20,50 @@
  [34mtrain[39m   [30mE:[39m 18               [30mS:[39m 17,000           [30mR:[39m -1665.1          [30mT:[39m 0:05:51
  [34mtrain[39m   [30mE:[39m 19               [30mS:[39m 18,000           [30mR:[39m -2110.7          [30mT:[39m 0:06:15
  [34mtrain[39m   [30mE:[39m 20               [30mS:[39m 19,000           [30mR:[39m -2118.4          [30mT:[39m 0:06:40
+ [34mtrain[39m   [30mE:[39m 21               [30mS:[39m 20,000           [30mR:[39m -2144.6          [30mT:[39m 0:07:04
+ [34mtrain[39m   [30mE:[39m 22               [30mS:[39m 21,000           [30mR:[39m -652.7           [30mT:[39m 0:07:28
+ [34mtrain[39m   [30mE:[39m 23               [30mS:[39m 22,000           [30mR:[39m -1987.5          [30mT:[39m 0:07:52
+ [34mtrain[39m   [30mE:[39m 24               [30mS:[39m 23,000           [30mR:[39m -1876.7          [30mT:[39m 0:08:16
+ [34mtrain[39m   [30mE:[39m 25               [30mS:[39m 24,000           [30mR:[39m -1798.6          [30mT:[39m 0:08:41
+ [34mtrain[39m   [30mE:[39m 26               [30mS:[39m 25,000           [30mR:[39m -1791.7          [30mT:[39m 0:09:04
+ [34mtrain[39m   [30mE:[39m 27               [30mS:[39m 26,000           [30mR:[39m -1772.3          [30mT:[39m 0:09:30
+ [34mtrain[39m   [30mE:[39m 28               [30mS:[39m 27,000           [30mR:[39m -1908.2          [30mT:[39m 0:09:57
+ [34mtrain[39m   [30mE:[39m 29               [30mS:[39m 28,000           [30mR:[39m -1745.1          [30mT:[39m 0:10:21
+ [34mtrain[39m   [30mE:[39m 30               [30mS:[39m 29,000           [30mR:[39m -1652.9          [30mT:[39m 0:10:48
+ [34mtrain[39m   [30mE:[39m 31               [30mS:[39m 30,000           [30mR:[39m -1622.6          [30mT:[39m 0:11:15
+ [34mtrain[39m   [30mE:[39m 32               [30mS:[39m 31,000           [30mR:[39m -1630.2          [30mT:[39m 0:11:42
+ [34mtrain[39m   [30mE:[39m 33               [30mS:[39m 32,000           [30mR:[39m -1877.9          [30mT:[39m 0:12:11
+ [34mtrain[39m   [30mE:[39m 34               [30mS:[39m 33,000           [30mR:[39m -1680.5          [30mT:[39m 0:12:39
+ [34mtrain[39m   [30mE:[39m 35               [30mS:[39m 34,000           [30mR:[39m -1907.9          [30mT:[39m 0:13:07
+ [34mtrain[39m   [30mE:[39m 36               [30mS:[39m 35,000           [30mR:[39m -1557.0          [30mT:[39m 0:13:36
+ [34mtrain[39m   [30mE:[39m 37               [30mS:[39m 36,000           [30mR:[39m -1741.9          [30mT:[39m 0:14:03
+ [34mtrain[39m   [30mE:[39m 38               [30mS:[39m 37,000           [30mR:[39m -1526.4          [30mT:[39m 0:14:33
+ [34mtrain[39m   [30mE:[39m 39               [30mS:[39m 38,000           [30mR:[39m -2068.0          [30mT:[39m 0:15:00
+ [34mtrain[39m   [30mE:[39m 40               [30mS:[39m 39,000           [30mR:[39m -1307.6          [30mT:[39m 0:15:28
+ [34mtrain[39m   [30mE:[39m 41               [30mS:[39m 40,000           [30mR:[39m -2088.5          [30mT:[39m 0:15:58
+ [34mtrain[39m   [30mE:[39m 42               [30mS:[39m 41,000           [30mR:[39m -1573.1          [30mT:[39m 0:16:27
+ [34mtrain[39m   [30mE:[39m 43               [30mS:[39m 42,000           [30mR:[39m -1761.9          [30mT:[39m 0:16:59
+ [34mtrain[39m   [30mE:[39m 44               [30mS:[39m 43,000           [30mR:[39m -1269.3          [30mT:[39m 0:17:28
+ [34mtrain[39m   [30mE:[39m 45               [30mS:[39m 44,000           [30mR:[39m -1510.1          [30mT:[39m 0:17:59
+ [34mtrain[39m   [30mE:[39m 46               [30mS:[39m 45,000           [30mR:[39m -1386.6          [30mT:[39m 0:18:28
+ [34mtrain[39m   [30mE:[39m 47               [30mS:[39m 46,000           [30mR:[39m -2236.3          [30mT:[39m 0:18:59
+ [34mtrain[39m   [30mE:[39m 48               [30mS:[39m 47,000           [30mR:[39m -1651.1          [30mT:[39m 0:19:29
+ [34mtrain[39m   [30mE:[39m 49               [30mS:[39m 48,000           [30mR:[39m -1420.6          [30mT:[39m 0:20:00
+ [34mtrain[39m   [30mE:[39m 50               [30mS:[39m 49,000           [30mR:[39m -1392.3          [30mT:[39m 0:20:32
+ [34mtrain[39m   [30mE:[39m 51               [30mS:[39m 50,000           [30mR:[39m -1745.0          [30mT:[39m 0:21:03
+Traceback (most recent call last):
+  File "train.py", line 109, in <module>
+    train(parse_cfg(Path().cwd() / __CONFIG__))
+  File "train.py", line 93, in train
+    common_metrics['episode_reward'] = evaluate(env, agent, cfg.eval_episodes, step, eval_numbering)
+  File "train.py", line 34, in evaluate
+    action = agent.plan(s, eval_mode=True, step=step, t0=t==0)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/jeongtae/RLMPPI/src/algorithm/tdmpc.py", line 126, in plan
+    value = self.estimate_value(s, actions, horizon).nan_to_num_(0) #추론된 reward 모델을 통해 reward계산
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/jeongtae/RLMPPI/src/algorithm/tdmpc.py", line 80, in estimate_value
+    G += discount * reward #Reward 합
+KeyboardInterrupt

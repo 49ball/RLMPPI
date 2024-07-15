@@ -62,6 +62,13 @@ def train(cfg):
 			action = agent.plan(s,step=step,t0=episode.first)
 			s, reward, done, _ = env.step(action.cpu().numpy()) #다음 state, reward, 끝났는지 확인 ->step으로 episode가 done 이 될때까지!!!!!!!!!!!!!!!!!
 			episode += (s, action, reward, done)
+		if len(episode) != cfg.episode_length:
+			iter=cfg.episode_length-len(episode)
+			flag=0
+			while flag < iter:
+				episode += (s, action, 0.0, done) 
+				flag+=1
+		
 		# if len(episode) != cfg.episode_length:
 		# 	iter=cfg.episode_length-len(episode)
 		# 	flag=0
