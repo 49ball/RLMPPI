@@ -1,0 +1,140 @@
+{
+    "os": "Linux-5.4.0-181-generic-x86_64-with-glibc2.17",
+    "python": "3.8.19",
+    "heartbeatAt": "2024-07-15T04:33:24.135911",
+    "startedAt": "2024-07-15T04:33:23.144033",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "train.py",
+    "codePathLocal": "train.py",
+    "codePath": "train.py",
+    "git": {
+        "remote": "https://github.com/49ball/RLMPPI.git",
+        "commit": "c403b4438563b4d0b41d85b7a3cb135c6ca1f4d8"
+    },
+    "email": null,
+    "root": "/home/dohyun/RLMPPI",
+    "host": "juny",
+    "username": "dohyun",
+    "executable": "/home/dohyun/miniconda3/envs/tdmpc/bin/python",
+    "cpu_count": 8,
+    "cpu_count_logical": 16,
+    "cpu_freq": {
+        "current": 1221.295625,
+        "min": 1200.0,
+        "max": 4425.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 1200.294,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 1200.35,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 1200.358,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 1200.335,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 1442.71,
+            "min": 1200.0,
+            "max": 4500.0
+        },
+        {
+            "current": 1199.999,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 1300.243,
+            "min": 1200.0,
+            "max": 4500.0
+        },
+        {
+            "current": 1200.143,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 1200.223,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 1200.187,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 1200.773,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 1200.154,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 1469.733,
+            "min": 1200.0,
+            "max": 4500.0
+        },
+        {
+            "current": 1200.206,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 1300.255,
+            "min": 1200.0,
+            "max": 4500.0
+        },
+        {
+            "current": 1200.316,
+            "min": 1200.0,
+            "max": 4400.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 458.25665283203125,
+            "used": 154.91817474365234
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "gpu_count": 4,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 2080 Ti",
+            "memory_total": 11554717696
+        },
+        {
+            "name": "NVIDIA GeForce RTX 2080 Ti",
+            "memory_total": 11554717696
+        },
+        {
+            "name": "NVIDIA GeForce RTX 2080 Ti",
+            "memory_total": 11554717696
+        },
+        {
+            "name": "NVIDIA GeForce RTX 2080 Ti",
+            "memory_total": 11553341440
+        }
+    ],
+    "memory": {
+        "total": 125.47534942626953
+    }
+}
