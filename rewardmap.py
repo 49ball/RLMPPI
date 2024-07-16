@@ -15,7 +15,7 @@ class RewardCalculator:
         max_reward=1.42
         
         distance_to_goal = torch.sqrt((x - goal[0])**2 + (y - goal[1])**2)
-        reward = max_reward-distance_to_goal*0.01
+        reward = -distance_to_goal*0.01
         
         obstacles = torch.tensor(self.obstacles, dtype=torch.float32, device='cuda')
         obs_x = obstacles[:, 0]
@@ -31,10 +31,10 @@ class RewardCalculator:
         #     reward = torch.tensor(-1000.0, dtype=torch.float32, device='cuda')
 
         if distance_to_goal <= 0.5:
-            reward = torch.tensor(5.0, dtype=torch.float32, device='cuda')
+            reward = torch.tensor(10.0, dtype=torch.float32, device='cuda')
 
         elif x <= 0 or x >= 100 or y <= 0 or y >= 100:
-            reward = torch.tensor(-2.0, dtype=torch.float32, device='cuda')
+            reward = torch.tensor(-5.0, dtype=torch.float32, device='cuda')
 
         return reward.cpu().numpy().item()
 

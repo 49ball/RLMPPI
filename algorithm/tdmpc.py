@@ -119,9 +119,10 @@ class TDMPC():
 			#torch randn 함수는 정규분포라서 아래와같은 작업 수행 (X=μ+σZ,Z=N(0,1))
 			actions = torch.clamp(mean.unsqueeze(1) + std.unsqueeze(1) * \
 				torch.randn(horizon, self.cfg.num_samples, self.cfg.action_dim, device=std.device), -2, 2)
-			actions[:, :, 1] = torch.clamp(actions[:, :, 1], -0.6981, 0.6981)  # Second action dimension: -0.6981 to 0.6981
 			if num_pi_trajs > 0:
 				actions = torch.cat([actions, pi_actions], dim=1) #샘플링한 action과 policy action합치기
+			actions[:, :, 1] = torch.clamp(actions[:, :, 1], -0.6981, 0.6981)  # Second action dimension: -0.6981 to 0.6981
+
 			# Compute elite actions
 			value = self.estimate_value(s, actions, horizon).nan_to_num_(0) #추론된 reward 모델을 통해 reward계산
 			elite_idxs = torch.topk(value.squeeze(1), self.cfg.num_elites, dim=0).indices #reward 가장 높은 k개의 action 뽑기

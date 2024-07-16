@@ -27,24 +27,25 @@ def evaluate(env, agent, num_episodes, step, eval_numbering):
 	"""Evaluate a trained agent and optionally save a video."""
 	episode_rewards = []
 	for i in range(num_episodes):
-		all_states=[]
-		s, done, ep_reward, t = env.reset(), False, 0, 0
-		all_states.append(s.copy())
+		all_states = []
+		s, done, ep_reward, t, action = env.reset(), False, 0, 0, [0, 0]
+		all_states.append(np.append(s.copy(), action))
 		while not done:
 			action = agent.plan(s, eval_mode=True, step=step, t0=t==0)
 			s, reward, done, _ = env.step(action.cpu().numpy())
-			all_states.append(s.copy())
+			all_states.append(np.append(s.copy(), action.cpu().numpy()))
 			ep_reward += reward
 			t += 1
 		directory = f'./logs/car/eval/{eval_numbering}'
 		if not os.path.exists(directory):
 			os.makedirs(directory)
 		episode_rewards.append(ep_reward)
-		states_df=pd.DataFrame(all_states)
+		states_df = pd.DataFrame(all_states)
 		file_name = f'states_{eval_numbering}_{i}_({int(ep_reward)}).csv'
 		file_path = os.path.join(directory, file_name)  # 전체 파일 경로를 만듦
-		states_df.to_csv(file_path, index=False)
+		states_df.to_csv(file_path, index=False, float_format='%.4f', sep='\t')
 	return np.nanmean(episode_rewards)
+
 
 
 def train(cfg):

@@ -2,18 +2,6 @@ import numpy as np
 import torch
 from math import pi, radians
 
-def normalise_angle_vectorized(angles, max_angle_deg=40):
-    max_angle = radians(max_angle_deg)  # 40도를 라디안으로 변환
-    min_angle = -max_angle
-    
-    if isinstance(angles, np.ndarray):
-        angles = np.where(angles > max_angle, max_angle, angles)
-        angles = np.where(angles < min_angle, min_angle, angles)
-    elif isinstance(angles, torch.Tensor):
-        angles = torch.where(angles > max_angle, max_angle, angles)
-        angles = torch.where(angles < min_angle, min_angle, angles)
-    
-    return angles
 
 class KinematicBicycleModel:
     def __init__(self, wheelbase: float = 2.5, max_steer: float = 0.6981, delta_time: float = 0.1):
@@ -55,11 +43,13 @@ class KinematicBicycleModel:
         # steering_angle = np.clip(steering_angle, -self.max_steer, self.max_steer)
 
         new_velocity = velocity + self.delta_time * acceleration
+        new_velocity = np.clip(new_velocity, -10, 10)  # new_velocity 클램핑
         angular_velocity = new_velocity * np.tan(steering_angle) / self.wheelbase
         
         new_x = x + new_velocity * np.cos(yaw) * self.delta_time
         new_y = y + new_velocity * np.sin(yaw) * self.delta_time
-        new_yaw = normalise_angle_vectorized(yaw + angular_velocity * self.delta_time)
+        new_yaw = yaw + angular_velocity * self.delta_time
+        new_yaw = np.mod(new_yaw, 2 * pi)
         
         new_states = np.stack((new_x, new_y, new_yaw, new_velocity), axis=1)
         
