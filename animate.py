@@ -27,9 +27,9 @@ class MapWithObstacles:
     def plot_map(self, ax):
         ax.set_xlim(0, self.map_size)
         ax.set_ylim(0, self.map_size)
-        # for (x, y) in self.obstacles:
-        #     circle = Circle((x, y), self.obstacle_radius, fc='gray', edgecolor='black')
-        #     ax.add_patch(circle)
+        for (x, y) in self.obstacles:
+            circle = Circle((x, y), self.obstacle_radius, fc='gray', edgecolor='black')
+            ax.add_patch(circle)
         ax.set_xlabel('X position')
         ax.set_ylabel('Y position')
         ax.set_title(f'{self.map_size}x{self.map_size} Map with Circular Obstacles')
@@ -40,7 +40,7 @@ class CarAnimation:
         self.car_length = car_length
         self.car_width = car_width
         self.dt = dt
-        self.positions = pd.read_csv(csv_file).values[1:, :3]  
+        self.positions = pd.read_csv(csv_file, delimiter='\t').values[1:, :3]  
         self.car_diagonal = sqrt((car_length / 2)**2 + car_width**2)
         self.map_obj = map_obj
 
@@ -84,7 +84,7 @@ class CarAnimation:
 car_length = 3.0  # 차량의 길이(미터)
 car_width = 1.5   # 차량의 너비(미터)
 dt = 0.1  # 시간 간격(초)
-csv_file = './logs/car/eval/1/states-1-9.csv'  # 입력 데이터 파일 경로
+csv_file = './logs/car/eval/1/states_1_1_(-144).csv'  # 입력 데이터 파일 경로
 
 # 맵 생성
 map_with_obstacles = MapWithObstacles()
