@@ -12,6 +12,7 @@ import logger
 from cfg import parse_cfg #바꿔야 할 부분
 from algorithm.tdmpc import TDMPC
 from algorithm.helper import Episode, ReplayBuffer
+import argparse
 
 
 __CONFIG__, __LOGS__ = 'cfgs', 'logs'
@@ -106,4 +107,9 @@ def train(cfg):
 
 
 if __name__ == "__main__":
-	train(parse_cfg(Path().cwd() / __CONFIG__))
+	parser = argparse.ArgumentParser()
+	parser.add_argument('--config', type='string', default='default.yaml', help='insert config file')
+	args = parser.parse_args()
+	config = args.config
+
+	train(parse_cfg(Path().cwd() / __CONFIG__, config=config))

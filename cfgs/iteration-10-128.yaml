@@ -41,8 +41,8 @@ state_dim: 4
 
 # wandb (insert your own)
 use_wandb: true
-wandb_project: "tdmpc_car" #project name
-wandb_entity: "49ball-Seoul National University" #team project name
+wandb_project: "tdmpc_car_dohyun" #project name
+wandb_entity: "sosvast-Seoul National University" #team project name
 
 # mis(miscellaneous))
 seed: 1

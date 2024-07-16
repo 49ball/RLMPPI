@@ -3,9 +3,9 @@ import re
 from omegaconf import OmegaConf
 
 
-def parse_cfg(cfg_path: str) -> OmegaConf:
+def parse_cfg(cfg_path: str, config='default.yaml') -> OmegaConf:
 	"""Parses a config file and returns an OmegaConf object."""
-	base = OmegaConf.load(cfg_path / 'default.yaml')
+	base = OmegaConf.load(cfg_path / config)
 	cli = OmegaConf.from_cli()
 	for k,v in cli.items():
 		if v == None:
