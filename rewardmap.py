@@ -9,13 +9,15 @@ class RewardCalculator:
 
     def calculate_reward(self, x, y, v):
         goal = torch.tensor([100, 100], dtype=torch.float32, device='cuda')
+        k_att = 10.0
         k_obs = 50.0
         sigma_x = 4.0
         sigma_y = 4.0
         max_reward=1.42
         
         distance_to_goal = torch.sqrt((x - goal[0])**2 + (y - goal[1])**2)
-        reward = -distance_to_goal*0.01
+        reward = max_reward-distance_to_goal*0.01
+        reward = k_att*reward
         
         obstacles = torch.tensor(self.obstacles, dtype=torch.float32, device='cuda')
         obs_x = obstacles[:, 0]

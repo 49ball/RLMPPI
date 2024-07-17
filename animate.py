@@ -84,7 +84,7 @@ class CarAnimation:
 car_length = 3.0  # 차량의 길이(미터)
 car_width = 1.5   # 차량의 너비(미터)
 dt = 0.1  # 시간 간격(초)
-csv_file = './logs/car/eval/1/states_1_9_(-369).csv'  # 입력 데이터 파일 경로
+csv_file = './logs/car/eval/10/states_10_0_(1397).csv'  # 입력 데이터 파일 경로
 
 # 맵 생성
 map_with_obstacles = MapWithObstacles()

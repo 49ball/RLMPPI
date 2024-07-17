@@ -23,7 +23,7 @@ def set_seed(seed):
 	torch.manual_seed(seed)
 	torch.cuda.manual_seed_all(seed)
 
-def evaluate(env, agent, num_episodes, step, eval_numbering):
+def evaluate(env, agent, num_episodes, step, eval_numbering, cfg):
 	"""Evaluate a trained agent and optionally save a video."""
 	episode_rewards = []
 	for i in range(num_episodes):
@@ -36,7 +36,7 @@ def evaluate(env, agent, num_episodes, step, eval_numbering):
 			all_states.append(np.append(s.copy(), action.cpu().numpy()))
 			ep_reward += reward
 			t += 1
-		directory = f'./logs/car/eval/{eval_numbering}'
+		directory = f'./logs/car/eval/{cfg.project}/{eval_numbering}'
 		if not os.path.exists(directory):
 			os.makedirs(directory)
 		episode_rewards.append(ep_reward)
@@ -98,7 +98,7 @@ def train(cfg):
 
 		# Evaluate agent periodically
 		if env_step % cfg.eval_freq == 0:
-			common_metrics['episode_reward'] = evaluate(env, agent, cfg.eval_episodes, step, eval_numbering)
+			common_metrics['episode_reward'] = evaluate(env, agent, cfg.eval_episodes, step, eval_numbering, cfg)
 			eval_numbering+=1
 			L.log(common_metrics, category='eval') 
 

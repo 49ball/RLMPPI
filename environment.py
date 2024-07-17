@@ -42,24 +42,31 @@ class MapWithObstacles:
         plt.grid(True)
         plt.show()
 
-    def calculate_reward(self, states):
+    def calculate_reward(self, states, prev_states):
         if len(states.shape) == 1:
             states = states.reshape(1, -1)
-
+        if len(prev_states.shape)==1:
+            prev_states = prev_states.reshape(1,-1)
+        
+        prev_states=torch.tensor(prev_states,dtype=torch.float32,device='cuda')
         states = torch.tensor(states, dtype=torch.float32, device='cuda')
+        prev_x, prev_y, prev_v = prev_states[:, 0], prev_states[:, 1], prev_states[:, 3]
         x, y, v = states[:, 0], states[:, 1], states[:, 3]
         goal = torch.tensor([100, 100], dtype=torch.float32, device='cuda')
         max_reward= 1.42
         
-        
+        k_att = 10.0
         k_obs = 50.0
         sigma_x = 4.0  # 수렴 계수
         sigma_y = 4.0  # 수렴 계수
-        
+
         # 목표 지점관련 리워드
+        prev_distance_to_goal=torch.sqrt((prev_x-goal[0])**2+(prev_y-goal[1])**2)
         distance_to_goal = torch.sqrt((x - goal[0])**2 + (y - goal[1])**2)
-        reward = -distance_to_goal*0.01
-        
+        reward = (prev_distance_to_goal-distance_to_goal)
+        # reward = max_reward-distance_to_goal*0.01
+        # reward = k_att*reward
+        done = False     
         # 장애물간의 거리를 계산한 리워드
         obstacles = torch.tensor(self.obstacles, dtype=torch.float32, device='cuda')
         obs_x = obstacles[:, 0].view(1, -1)
@@ -67,14 +74,15 @@ class MapWithObstacles:
         # distance_to_obstacles = ((x.view(-1, 1) - obs_x)**2 + (y.view(-1, 1) - obs_y)**2).clone().detach()
         # Cost = torch.exp(-(((x.view(-1, 1) - obs_x)**2 / sigma_x**2) + ((y.view(-1, 1) - obs_y)**2 / sigma_y**2)))
         # reward -= k_obs * torch.sum(Cost, dim=1)*0.01
-        done = False     
 
         #차량 속도와 관련된 리워드
        # speed_reward = torch.clamp(v / 3.0, 0.0, 1.0) #속도 리워드 정규화(0에서3)
-        speed_reward= 0.0
-        if speed_reward<0.0:
-            speed_reward=-1
-        reward += speed_reward
+        # speed_reward = 0.0
+        # if v < 0.0:
+        #     speed_reward=-1
+        # elif v > 1.0:
+        #     speed_reward = 0.1
+        # reward += speed_reward
 
         # if torch.any(distance_to_obstacles < 3.5, dim=1): #차가 장애물과의 거리가 너무 가까울땐 중단
         #     done =True
@@ -108,8 +116,9 @@ class Env(object):
 
     def step(self, action):
         # action을 기반으로 환경 상태를 업데이트하는 메서드
+        prev_state=self.state.copy()
         self.state[0], self.state[1], self.state[2], self.state[3] = self.model.update(self.state, action)
-        reward,done =self.map.calculate_reward(self.state)
+        reward,done =self.map.calculate_reward(self.state,prev_state)
         # done 상태와 reward, 그리고 관찰(observation) 값 리턴
         self.t += 1
         return self.observe(), reward, done or self.t == self.ep_len, {}
@@ -133,7 +142,7 @@ def make_env(cfg):
     return env
 
 # map_with_obstacles = MapWithObstacles()
-# state = np.array([0, 0, 0, 0])
+# state = np.array([3, 3, 0, 1.1])
 # reward, done = map_with_obstacles.calculate_reward(state)
 # print(f"Reward for state {state} : {reward}, Done: {done}")
 
