@@ -31,10 +31,10 @@ class TOLD(nn.Module):
 
 	def pi(self, s, std=0): #policy로부터 sampling, 평균 반환
 		"""Samples an action from the learned policy (pi)."""
-		mu = torch.tanh(self._pi(s))
+		mu = torch.tanh(self._pi(s)) #행동공간 정규화
 		if std > 0:
-			std = torch.ones_like(mu) * std
-			return h.TruncatedNormal(mu, std).sample(clip=0.3)
+			std = torch.ones_like(mu) * std #mu와 같은 크기의 텐서 만듬
+			return h.TruncatedNormal(mu, std).sample(clip=0.3) #샘플링된 값을 -0.3에서 0.3으로 제한
 		return mu 
 
 	def Q(self, s, a): # final state-action value prediction
@@ -102,8 +102,10 @@ class TDMPC():
 		if num_pi_trajs > 0:
 			pi_actions = torch.empty(horizon, num_pi_trajs, self.cfg.action_dim, device=self.device)
 			s = s1.repeat(num_pi_trajs, 1) #TOLD를 활용해서 encoding observation, 배열이 만들어짐(num_pio_trajs,1) 크기
+			#breakpoint()
 			for t in range(horizon): #이부분은 pi_actions[t]를 채우기 위해 필요한 과정
 				pi_actions[t] = self.model.pi(s, self.cfg.min_std) #samples an action and save
+				#breakpoint()
 				s, _ = self.model.next(s, pi_actions[t])  #next space and single-step reward
 
 		# Initialize state and parameters 초기화하는 작업
@@ -141,6 +143,7 @@ class TDMPC():
 		actions = elite_actions[:, np.random.choice(np.arange(score.shape[0]), p=score)] #엘리트 행동중 무작위로 action 저장
 		self._prev_mean = mean #현재 mean값을 저장하여 다음반복에서 사용하도록 설정
 		mean, std = actions[0], _std[0] #선택된 행동의 첫번째값과 현재 표준편차의 첫번째값을 사용하여 새로운 평균과 표준편차 설정
+		#breakpoint()
 		a = mean
 		if not eval_mode:
 			a += std * torch.randn(self.cfg.action_dim, device=std.device) #평가모드가 아니면 (X=μ+σZ,Z=N(0,1)) 행동 생성
@@ -177,7 +180,6 @@ class TDMPC():
 		self.optim.zero_grad(set_to_none=True)
 		self.std = h.linear_schedule(self.cfg.std_schedule, step)
 		self.model.train() #training 모드
-
 		# Representation
 		ss = [s.detach()] #메모리 사용량을 줄이기위해 따로 변수 저장(그래디언트가 전달되지않음)
 
@@ -189,6 +191,7 @@ class TDMPC():
 			reward_pred = self.model._reward(torch.cat([s, action[t]], dim=-1))
 			with torch.no_grad():
 				td_target = self._td_target(next_ses[t], reward[t]) #다음 step의 td target을 계산함
+			ss.append(next_ses[t].detach())
 			# Losses
 			rho = (self.cfg.rho ** t)
 			reward_loss += rho * h.mse(reward_pred, reward[t]) #reward prediction loss
@@ -204,7 +207,6 @@ class TDMPC():
 		grad_norm = torch.nn.utils.clip_grad_norm_(self.model.parameters(), self.cfg.grad_clip_norm, error_if_nonfinite=False) #gradient clippping
 		self.optim.step() #optimizer을 이용해 파라미터 업데이트
 		replay_buffer.update_priorities(idxs, priority_loss.clamp(max=1e4).detach()) #리플레이 버퍼의 우선순위 업데이트, priority loss는 0.001을 초과하지 않도록 클램핑함, gradient 추적되지않도록 detach
-
 		# Update policy + target network
 		pi_loss = self.update_pi(ss) #policy의 loss 반환 및 policy 모델 파라미터 업데이트
 		if step % self.cfg.update_freq == 0: #업데이트 freq마다 target network의 파라미터를 온라인 네트워크의 파라미터로 업데이트함
