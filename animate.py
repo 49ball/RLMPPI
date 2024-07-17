@@ -66,8 +66,8 @@ class CarAnimation:
             return line, car_marker
 
         ani = FuncAnimation(fig, update, frames=len(self.positions), init_func=init, blit=True, interval=self.dt * 1000)
-        ax.scatter(0, 0, color='red', s=1000, label='Start')
-        ax.scatter(100, 100, color='green', s=1000, label='Goal')
+        ax.scatter(0, 0, color='red', s=180, label='Start')
+        ax.scatter(100, 100, color='green', s=180, label='Goal')
         ax.set_xlim(0, 100)
         ax.set_xlim(0, 100)
         ax.set_xlabel('X position (m)')
@@ -84,7 +84,7 @@ class CarAnimation:
 car_length = 3.0  # 차량의 길이(미터)
 car_width = 1.5   # 차량의 너비(미터)
 dt = 0.1  # 시간 간격(초)
-csv_file = './logs/car/eval/replay_buffer_change/3/states_3_4_(54).csv'  # 입력 데이터 파일 경로
+csv_file = './logs/car/eval/time_reward/3/states_3_1_(111).csv'  # 입력 데이터 파일 경로
 
 # 맵 생성
 map_with_obstacles = MapWithObstacles()

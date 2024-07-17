@@ -76,7 +76,7 @@ class TDMPC():
 		"""Estimate value of a trajectory starting at state s and executing given actions."""
 		G, discount = 0, 1
 		for t in range(horizon):
-			reward = self.model._reward(torch.cat([s, actions[t]], dim=-1))
+			s, reward = self.model.next(s, actions[t]) # s도 계속 업데이트 해줘야함!!!
 			G += discount * reward #Reward 합
 			discount *= self.cfg.discount
 		G += discount * torch.min(*self.model.Q(s, self.model.pi(s, self.cfg.min_std))) #terminal reward, s와 action 값을 넣고 value를 계산 
@@ -105,8 +105,7 @@ class TDMPC():
 			#breakpoint()
 			for t in range(horizon): #이부분은 pi_actions[t]를 채우기 위해 필요한 과정
 				pi_actions[t] = self.model.pi(s, self.cfg.min_std) #samples an action and save
-				#breakpoint()
-				s, _ = self.model.next(s, pi_actions[t])  #next space and single-step reward
+				s, _ = self.model.next(s, pi_actions[t])  #next space and single-step reward -> pi_actions를 뽑아내주기 위해서 s도 같이 뽑아냄
 
 		# Initialize state and parameters 초기화하는 작업
 		s = s1.repeat(self.cfg.num_samples+num_pi_trajs, 1) #샘플링 개수에 policy trajectory개수까지 추가
@@ -149,7 +148,7 @@ class TDMPC():
 			a += std * torch.randn(self.cfg.action_dim, device=std.device) #평가모드가 아니면 (X=μ+σZ,Z=N(0,1)) 행동 생성
 		return a
 
-	def update_pi(self, ss):
+	def update_pi(self, ss): #학습중인 Q 함수를 통해 pi loss 업데이트
 		"""Update policy using a sequence of latent states."""
 		self.pi_optim.zero_grad(set_to_none=True) #optimizer gradient 초기화, 메모리절약을 위해 gradient none으로 설정
 		self.model.track_q_grad(False) #Q-value네트워크의 gradient tracking 중지(Q-value 네트워크의 파라미터가 업데이트되지 않도록 하기위함)
@@ -180,23 +179,23 @@ class TDMPC():
 		self.optim.zero_grad(set_to_none=True)
 		self.std = h.linear_schedule(self.cfg.std_schedule, step)
 		self.model.train() #training 모드
+
 		# Representation
 		ss = [s.detach()] #메모리 사용량을 줄이기위해 따로 변수 저장(그래디언트가 전달되지않음)
-
 		reward_loss, value_loss, priority_loss = 0, 0, 0
 		for t in range(self.cfg.horizon):#horizon 만큼
 
 			# Predictions
 			Q1, Q2 = self.model.Q(s, action[t]) #state action value 뽑아냄
-			reward_pred = self.model._reward(torch.cat([s, action[t]], dim=-1))
-			with torch.no_grad():
+			s, reward_pred = self.model.next(s, action[t]) #told 모델로부터 리워드 뽑기
+			with torch.no_grad():				
 				td_target = self._td_target(next_ses[t], reward[t]) #다음 step의 td target을 계산함
-			ss.append(next_ses[t].detach())
+			ss.append(s.detach())
 			# Losses
 			rho = (self.cfg.rho ** t)
-			reward_loss += rho * h.mse(reward_pred, reward[t]) #reward prediction loss
-			value_loss += rho * (h.mse(Q1, td_target) + h.mse(Q2, td_target)) #value prediction loss
-			priority_loss += rho * (h.l1(Q1, td_target) + h.l1(Q2, td_target)) #리플레이 버퍼 우선순위 설정
+			reward_loss += rho * h.mse(reward_pred, reward[t]) #reward prediction loss ->리워드 업데이트 목적함수
+			value_loss += rho * (h.mse(Q1, td_target) + h.mse(Q2, td_target)) #value prediction loss -> value업데이트 목적함수
+			priority_loss += rho * (h.l1(Q1, td_target) + h.l1(Q2, td_target)) #리플레이 버퍼 우선순위 설정 
 
 		# Optimize model
 		total_loss = self.cfg.reward_coef * reward_loss.clamp(max=1e4) + \

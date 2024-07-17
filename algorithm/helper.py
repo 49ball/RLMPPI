@@ -265,8 +265,8 @@ class ReplayBuffer():
 			action[t] = self._action[_idxs]
 			reward[t] = self._reward[_idxs]
 
-			mask=self._reward[_idxs+1]==0
-			next_s[t,mask]=self._last_s[_idxs[mask]//self.cfg.episode_length]
+			mask=self._reward[_idxs+1]==0.0
+			next_s[t,mask]=self._last_s[_idxs[mask]//self.cfg.episode_length].cuda().float()
 
 		# mask = (_idxs+1) % self.cfg.episode_length == 0 #마지막인지 확인
 		# #next_s 마지막 타임스텝에서 mask 가 true일때 마지막 state를 넣어줌
