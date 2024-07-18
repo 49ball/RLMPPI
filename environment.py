@@ -100,7 +100,7 @@ class MapWithObstacles:
 
 class Env(object):
     def __init__(self, x, y, yaw, velocity, action_repeat):
-        self.state = np.array([x, y, yaw, velocity])
+        self.state = torch.tensor([x, y, yaw, velocity], dtype=torch.float32, device='cuda')
         self.shape = self.state.shape  # 관찰 공간의 형태 (x, y, yaw, velocity)
         self.action_space = (2,)  # 액션 공간의 형태 (acceleration, steering_angle)
         self.map=MapWithObstacles()
@@ -110,13 +110,13 @@ class Env(object):
 
     def reset(self):
         # 환경을 초기화하는 메서드
-        self.state = np.array([0.0, 0.0, random.uniform(0, pi / 2), 0.0])
+        self.state = torch.tensor([0.0, 0.0, random.uniform(0, pi / 2), 0.0], device='cuda')
         self.t = 0
         return self.observe()
 
     def step(self, action):
         # action을 기반으로 환경 상태를 업데이트하는 메서드
-        prev_state=self.state.copy()
+        prev_state=self.state.clone()
         self.state[0], self.state[1], self.state[2], self.state[3] = self.model.update(self.state, action)
         reward,done =self.map.calculate_reward(self.state,prev_state)
         # done 상태와 reward, 그리고 관찰(observation) 값 리턴

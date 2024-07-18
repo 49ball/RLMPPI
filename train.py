@@ -1,3 +1,4 @@
+import csv
 import warnings
 warnings.filterwarnings('ignore')
 import os
@@ -26,25 +27,52 @@ def set_seed(seed):
 def evaluate(env, agent, num_episodes, step, eval_numbering, cfg):
 	"""Evaluate a trained agent and optionally save a video."""
 	episode_rewards = []
+	directory = f'./logs/car/eval/{cfg.project}/{eval_numbering}'
+	if not os.path.exists(directory):
+		os.makedirs(directory)
 	for i in range(num_episodes):
-		all_states = []
-		s, done, ep_reward, t, action = env.reset(), False, 0, 0, [0, 0]
-		all_states.append(np.append(s.copy(), action))
-		while not done:
-			action = agent.plan(s, eval_mode=True, step=step, t0=t==0)
-			s, reward, done, _ = env.step(action.cpu().numpy())
-			all_states.append(np.append(s.copy(), action.cpu().numpy()))
-			ep_reward += reward
-			t += 1
-		directory = f'./logs/car/eval/{cfg.project}/{eval_numbering}'
-		if not os.path.exists(directory):
-			os.makedirs(directory)
+		temp_file_path = os.path.join(directory, f'temp_states_{i}.csv')
+		with open(temp_file_path, mode='w', newline='') as temp_file:
+			writer = csv.writer(temp_file, delimiter='\t')
+			s, done, ep_reward, t = env.reset(), False, 0, 0
+			writer.writerow(s.tolist())  # 초기 상태 저장
+			while not done:
+				action = agent.plan(s, eval_mode=True, step=step, t0=t == 0)
+				s, reward, done, _ = env.step(action)
+				writer.writerow(s.tolist())  # 상태를 파일에 저장
+				ep_reward += reward
+				t += 1
+		# 에피소드가 끝난 후에 파일 이름을 변경
+		final_file_name = f'states_{eval_numbering}_{i}_({int(ep_reward)}).csv'
+		final_file_path = os.path.join(directory, final_file_name)
+		os.rename(temp_file_path, final_file_path)
 		episode_rewards.append(ep_reward)
-		states_df = pd.DataFrame(all_states)
-		file_name = f'states_{eval_numbering}_{i}_({int(ep_reward)}).csv'
-		file_path = os.path.join(directory, file_name)  # 전체 파일 경로를 만듦
-		states_df.to_csv(file_path, index=False, float_format='%.4f', sep='\t')
+	
 	return np.nanmean(episode_rewards)
+
+
+# def evaluate(env, agent, num_episodes, step, eval_numbering, cfg):
+# 	"""Evaluate a trained agent and optionally save a video."""
+# 	episode_rewards = []
+# 	for i in range(num_episodes):
+# 		all_states = []
+# 		s, done, ep_reward, t, action = env.reset(), False, 0, 0, [0, 0]
+# 		all_states.append(np.append(s.copy(), action))
+# 		while not done:
+# 			action = agent.plan(s, eval_mode=True, step=step, t0=t==0)
+# 			s, reward, done, _ = env.step(action.cpu().numpy())
+# 			all_states.append(np.append(s.copy(), action.cpu().numpy()))
+# 			ep_reward += reward
+# 			t += 1
+# 		directory = f'./logs/car/eval/{cfg.project}/{eval_numbering}'
+# 		if not os.path.exists(directory):
+# 			os.makedirs(directory)
+# 		episode_rewards.append(ep_reward)
+# 		states_df = pd.DataFrame(all_states)
+# 		file_name = f'states_{eval_numbering}_{i}_({int(ep_reward)}).csv'
+# 		file_path = os.path.join(directory, file_name)  # 전체 파일 경로를 만듦
+# 		states_df.to_csv(file_path, index=False, float_format='%.4f', sep='\t')
+# 	return np.nanmean(episode_rewards)
 
 
 
@@ -61,7 +89,7 @@ def train(cfg):
 		episode=Episode(cfg,s) #여기서 s는 state차원과 action 차원을 보내줘야함
 		while not episode.done:
 			action = agent.plan(s,step=step,t0=episode.first)
-			s, reward, done, _ = env.step(action.cpu().numpy()) #다음 state, reward, 끝났는지 확인 ->step으로 episode가 done 이 될때까지!!!!!!!!!!!!!!!!!
+			s, reward, done, _ = env.step(action) #다음 state, reward, 끝났는지 확인 ->step으로 episode가 done 이 될때까지!!!!!!!!!!!!!!!!!
 			episode += (s, action, reward, done)
 		if len(episode) != cfg.episode_length:
 			iter=cfg.episode_length-len(episode)

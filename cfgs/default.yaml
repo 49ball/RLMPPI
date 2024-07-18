@@ -1,5 +1,5 @@
 #project
-project : "reward_prev"
+project : "test"
 
 # environment
 task: car
@@ -43,7 +43,7 @@ mlp_dim: 512
 state_dim: 4
 
 # wandb (insert your own)
-use_wandb: true
+use_wandb: false
 wandb_project: "tdmpc_car" #project name
 wandb_entity: "49ball-Seoul National University" #team project name
 

@@ -244,6 +244,7 @@ class ReplayBuffer():
 		next_s = torch.empty((self.cfg.horizon+1, self.cfg.batch_size, *next_s_shape), dtype=s.dtype, device=s.device)
 		action = torch.empty((self.cfg.horizon+1, self.cfg.batch_size, *self._action.shape[1:]), dtype=torch.float32, device=self.device)
 		reward = torch.empty((self.cfg.horizon+1, self.cfg.batch_size), dtype=torch.float32, device=self.device)
+		breakpoint()
 
 		# 유효한 인덱스 찾기
 		valid_idx = (self._reward != 0.0).nonzero(as_tuple=False).squeeze() #리워드가 0이 아닌 부분 찾기
@@ -255,9 +256,9 @@ class ReplayBuffer():
 				_idxs=_idxs + t
 			invalid_mask = self._reward[_idxs] == 0.0 #배치사이즈만큼 뽑아서 리워드가0인 부분 마스킹
 			if invalid_mask.any():
-				valid_indices = valid_idx.unsqueeze(0).expand(invalid_mask.sum(), -1) #invalid_mask의 true인 개수만큼 차원 증가
-				invalid_indices = _idxs[invalid_mask].unsqueeze(1) #invalid_mask가 true인 부분만 저장
-				next_valid_indices = valid_indices > invalid_indices #값들 비교해서 valid_indices가 큰부분이 True로
+				valid_indices = valid_idx.unsqueeze(0).expand(invalid_mask.sum(), -1) #invalid_mask의 true인 개수만큼 차원 증가 ex [1217]->[395,1217]
+				invalid_indices = _idxs[invalid_mask].unsqueeze(1) #invalid_mask가 true인 부분만 저장 ex [395,1]
+				next_valid_indices = valid_indices > invalid_indices #값들 비교해서 valid_indices가 큰부분이 True로 
 				next_valid_indices = next_valid_indices.to(dtype=torch.int) #자료형 변환
 				#_idxs 중에서 invalid_mask가 true인 값들은 바로 다음 valid한 값으로 넘어가도록함
 				_idxs[invalid_mask] = valid_idx[next_valid_indices.argmax(dim=1)] #다음값은 무조건 done이든 뭐든 reward가 존재하니까 가능
@@ -266,7 +267,7 @@ class ReplayBuffer():
 			reward[t] = self._reward[_idxs]
 
 			mask=self._reward[_idxs+1]==0.0
-			next_s[t,mask]=self._last_s[_idxs[mask]//self.cfg.episode_length].cuda().float()
+			next_s[t,mask]=self._last_s[_idxs[mask]//self.cfg.episode_length-1].cuda().float()
 
 		# mask = (_idxs+1) % self.cfg.episode_length == 0 #마지막인지 확인
 		# #next_s 마지막 타임스텝에서 mask 가 true일때 마지막 state를 넣어줌

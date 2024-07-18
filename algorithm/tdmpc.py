@@ -1,3 +1,4 @@
+import time
 import numpy as np
 import torch
 import torch.nn as nn
@@ -102,6 +103,7 @@ class TDMPC():
 		if num_pi_trajs > 0:
 			pi_actions = torch.empty(horizon, num_pi_trajs, self.cfg.action_dim, device=self.device)
 			s = s1.repeat(num_pi_trajs, 1) #TOLD를 활용해서 encoding observation, 배열이 만들어짐(num_pio_trajs,1) 크기
+			
 			#breakpoint()
 			for t in range(horizon): #이부분은 pi_actions[t]를 채우기 위해 필요한 과정
 				pi_actions[t] = self.model.pi(s, self.cfg.min_std) #samples an action and save
@@ -116,6 +118,7 @@ class TDMPC():
 
 		# Iterate CEM
 		for i in range(self.cfg.iterations):
+
 			#mean 텐서의 두번째 차원에 새로운 차원 추가 ex)3x2 -> 3x1x2, clamp함수는 일정범위안으로 바꿔주는것, 랜덤 샘플링해서 -1,1사이로 샘플링 
 			#torch randn 함수는 정규분포라서 아래와같은 작업 수행 (X=μ+σZ,Z=N(0,1))
 			actions = torch.clamp(mean.unsqueeze(1) + std.unsqueeze(1) * \
@@ -123,7 +126,6 @@ class TDMPC():
 			if num_pi_trajs > 0:
 				actions = torch.cat([actions, pi_actions], dim=1) #샘플링한 action과 policy action합치기
 			actions[:, :, 1] = torch.clamp(actions[:, :, 1], -0.6981, 0.6981)  # Second action dimension: -0.6981 to 0.6981
-
 			# Compute elite actions
 			value = self.estimate_value(s, actions, horizon).nan_to_num_(0) #추론된 reward 모델을 통해 reward계산
 			elite_idxs = torch.topk(value.squeeze(1), self.cfg.num_elites, dim=0).indices #reward 가장 높은 k개의 action 뽑기
@@ -136,16 +138,17 @@ class TDMPC():
 			_std = torch.sqrt(torch.sum(score.unsqueeze(0) * (elite_actions - _mean.unsqueeze(1)) ** 2, dim=1) / (score.sum(0) + 1e-9))#엘리트 행동의 가중표준편차 계산
 			_std = _std.clamp_(self.std, 2) # 표준편차를 self.std와 2사이로 clamping, 일관된 탐색을 위해 제한을 걸어둠, clamp_는 원래 텐서값을 변경함
 			mean, std = self.cfg.momentum * mean + (1 - self.cfg.momentum) * _mean, _std #momentum을 이용해 평균을 업데이트함
-		
+
 		# Outputs
 		score = score.squeeze(1).cpu().numpy() #점수텐서를 1차원으로 변환하고 확률분포 기반 샘플링을 위해 numpy로 변환
 		actions = elite_actions[:, np.random.choice(np.arange(score.shape[0]), p=score)] #엘리트 행동중 무작위로 action 저장
 		self._prev_mean = mean #현재 mean값을 저장하여 다음반복에서 사용하도록 설정
 		mean, std = actions[0], _std[0] #선택된 행동의 첫번째값과 현재 표준편차의 첫번째값을 사용하여 새로운 평균과 표준편차 설정
-		#breakpoint()
+
 		a = mean
 		if not eval_mode:
 			a += std * torch.randn(self.cfg.action_dim, device=std.device) #평가모드가 아니면 (X=μ+σZ,Z=N(0,1)) 행동 생성
+
 		return a
 
 	def update_pi(self, ss): #학습중인 Q 함수를 통해 pi loss 업데이트
