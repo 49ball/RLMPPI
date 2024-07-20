@@ -146,3 +146,11 @@ class Logger:
 			self._eval.append(np.array([d[keys[0]], d[keys[1]]]))
 			pd.DataFrame(np.array(self._eval)).to_csv(self._log_dir / 'eval.log', header=keys, index=None)
 		self._print(d, category)
+
+	def log_state_action(self, state, action, step, category='train'):
+		if self._wandb is not None:
+			log_data = {
+				f'{category}/state': wandb.Histogram(state),
+				f'{category}/action': wandb.Histogram(action)
+			}
+			self._wandb.log(log_data, step=step)

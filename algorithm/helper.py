@@ -1,3 +1,4 @@
+import time
 import re
 import numpy as np
 import torch
@@ -151,6 +152,9 @@ class Episode(object):
 		self.reward = torch.empty((cfg.episode_length,), dtype=torch.float32, device=self.device) #에피소드별 보상
 		self.cumulative_reward = 0
 		self.done = False
+		self.done_array = torch.empty((cfg.episode_length,), dtype=torch.float32, device=self.device) #에피소드별 done
+		self.done_array2 = torch.empty((cfg.episode_length,), dtype=torch.float32, device=self.device) #에피소드별 done
+		self.real_length = 0
 		self._idx = 0
 	
 	def __len__(self):
@@ -164,12 +168,17 @@ class Episode(object):
 		self.add(*transition)
 		return self
 
-	def add(self, s, action, reward, done):
+	def add(self, s, action, reward, done, flag):
 		self.s[self._idx+1] = torch.tensor(s, dtype=self.s.dtype, device=self.s.device)
 		self.action[self._idx] = action
 		self.reward[self._idx] = reward
 		self.cumulative_reward += reward
 		self.done = done
+		if self.done:
+			self.done_array[self._idx] = torch.tensor(1, dtype=self.s.dtype, device=self.s.device)
+		else:
+			self.done_array[self._idx] = torch.tensor(0, dtype=self.s.dtype, device=self.s.device)
+		self.done_array2[self._idx] = torch.tensor(flag, dtype=self.s.dtype, device=self.s.device)
 		self._idx += 1
 
 
@@ -189,7 +198,10 @@ class ReplayBuffer():
 		self._last_s = torch.empty((self.capacity//cfg.episode_length, *cfg.s_shape), dtype=dtype, device=self.device)
 		self._action = torch.empty((self.capacity, cfg.action_dim), dtype=torch.float32, device=self.device)
 		self._reward = torch.empty((self.capacity,), dtype=torch.float32, device=self.device)
+		self._done = torch.empty((self.capacity,), dtype=torch.float32, device=self.device)
+		self._done2 = torch.empty((self.capacity,), dtype=torch.float32, device=self.device)
 		self._priorities = torch.ones((self.capacity,), dtype=torch.float32, device=self.device)
+		self.ep_length=[]
 		self._eps = 1e-6
 		self._full = False
 		self.idx = 0
@@ -202,14 +214,19 @@ class ReplayBuffer():
 		self._s[self.idx:self.idx+self.cfg.episode_length] = episode.s[:-1] if self.cfg.modality == 'state' else episode.s[:-1, -3:]
 		self._last_s[self.idx//self.cfg.episode_length] = episode.s[-1]
 		self._action[self.idx:self.idx+self.cfg.episode_length] = episode.action #epsiode_length만큼 계속 채우기
-		self._reward[self.idx:self.idx+self.cfg.episode_length] = episode.reward #epsiode_length만큼 계속 채우기
-
+		self._reward[self.idx:self.idx+self.cfg.episode_length] = episode.reward #epsiode_length만큼 계속 채우기			
+		self._done[self.idx:self.idx+self.cfg.episode_length] = episode.done_array
+		self._done2[self.idx:self.idx+self.cfg.episode_length] = episode.done_array2
+		self.ep_length.append(episode.real_length)
+		
 		if self._full:
 			max_priority = self._priorities.max().to(self.device).item()
 		else:
 			max_priority = 1. if self.idx == 0 else self._priorities[:self.idx].max().to(self.device).item()
-		mask = torch.arange(self.cfg.episode_length) >= self.cfg.episode_length-self.cfg.horizon
-		new_priorities = torch.full((self.cfg.episode_length,), max_priority, device=self.device)
+		start_index = episode.real_length - self.cfg.horizon #에피소드 길이에서 horizon 길이 뺀값 즉 horizon만큼 뽑지 못하는 부분은 안뽑는것
+		start_index = torch.max(torch.tensor([start_index, 0], device=self.device)) #horizon길이보다도 작을때 처리
+		mask = torch.arange(self.cfg.episode_length,device=self.device) > start_index #마스킹 처리 
+		new_priorities = torch.full((self.cfg.episode_length,), max_priority, device=self.device) #뽑지못하는부분은 안뽑게 우선순위 부여
 		new_priorities[mask] = 0
 		self._priorities[self.idx:self.idx+self.cfg.episode_length] = new_priorities
 		self.idx = (self.idx + self.cfg.episode_length) % self.capacity
@@ -230,52 +247,40 @@ class ReplayBuffer():
 			_idxs[mask] -= 1
 			s[:, -(i+1)*3:-i*3] = arr[_idxs].cuda()
 		return s.float()
-
+		
 	def sample(self):
+		# 우선순위 기반 확률 계산
 		probs = (self._priorities if self._full else self._priorities[:self.idx]) ** self.cfg.per_alpha
 		probs /= probs.sum()
 		total = len(probs)
 		idxs = torch.from_numpy(np.random.choice(total, self.cfg.batch_size, p=probs.cpu().numpy(), replace=not self._full)).to(self.device)
 		weights = (total * probs[idxs]) ** (-self.cfg.per_beta)
 		weights /= weights.max()
-
 		s = self._get_s(self._s, idxs)
 		next_s_shape = self._last_s.shape[1:] if self.cfg.modality == 'state' else (3*self.cfg.frame_stack, *self._last_s.shape[-2:])
 		next_s = torch.empty((self.cfg.horizon+1, self.cfg.batch_size, *next_s_shape), dtype=s.dtype, device=s.device)
 		action = torch.empty((self.cfg.horizon+1, self.cfg.batch_size, *self._action.shape[1:]), dtype=torch.float32, device=self.device)
 		reward = torch.empty((self.cfg.horizon+1, self.cfg.batch_size), dtype=torch.float32, device=self.device)
-		breakpoint()
-
-		# 유효한 인덱스 찾기
-		valid_idx = (self._reward != 0.0).nonzero(as_tuple=False).squeeze() #리워드가 0이 아닌 부분 찾기
+		done = torch.empty((self.cfg.horizon+1, self.cfg.batch_size), dtype=torch.float32, device=self.device)
+		done2 = torch.empty((self.cfg.horizon+1, self.cfg.batch_size), dtype=torch.float32, device=self.device)
 
 		for t in range(self.cfg.horizon+1): #horizon만큼 진행함
-			if t==0:
-				_idxs = idxs + t
-			else:
-				_idxs=_idxs + t
-			invalid_mask = self._reward[_idxs] == 0.0 #배치사이즈만큼 뽑아서 리워드가0인 부분 마스킹
-			if invalid_mask.any():
-				valid_indices = valid_idx.unsqueeze(0).expand(invalid_mask.sum(), -1) #invalid_mask의 true인 개수만큼 차원 증가 ex [1217]->[395,1217]
-				invalid_indices = _idxs[invalid_mask].unsqueeze(1) #invalid_mask가 true인 부분만 저장 ex [395,1]
-				next_valid_indices = valid_indices > invalid_indices #값들 비교해서 valid_indices가 큰부분이 True로 
-				next_valid_indices = next_valid_indices.to(dtype=torch.int) #자료형 변환
-				#_idxs 중에서 invalid_mask가 true인 값들은 바로 다음 valid한 값으로 넘어가도록함
-				_idxs[invalid_mask] = valid_idx[next_valid_indices.argmax(dim=1)] #다음값은 무조건 done이든 뭐든 reward가 존재하니까 가능
+			_idxs = idxs + t		
 			next_s[t] = self._get_s(self._s, _idxs+1)
 			action[t] = self._action[_idxs]
 			reward[t] = self._reward[_idxs]
-
-			mask=self._reward[_idxs+1]==0.0
-			next_s[t,mask]=self._last_s[_idxs[mask]//self.cfg.episode_length-1].cuda().float()
-
-		# mask = (_idxs+1) % self.cfg.episode_length == 0 #마지막인지 확인
-		# #next_s 마지막 타임스텝에서 mask 가 true일때 마지막 state를 넣어줌
+			done[t] = self._done[_idxs]
+			done2[t] = self._done2[_idxs]
+		# mask = self._reward[_idxs+1] == 0 #마지막인지 확인
+		#next_s 마지막 타임스텝에서 mask 가 true일때 마지막 state를 넣어줌
 		# next_s[-1, mask] = self._last_s[_idxs[mask]//self.cfg.episode_length].cuda().float() 
+		mask = (_idxs+1) % self.cfg.episode_length == 0
+		next_s[-1, mask] = self._last_s[_idxs[mask]//self.cfg.episode_length].cuda().float()
 		if not action.is_cuda:
-			action, reward, idxs, weights = action.cuda(), reward.cuda(), idxs.cuda(), weights.cuda()
+			action, reward, done, done2, idxs, weights = action.cuda(), reward.cuda(), done.cuda(), done2.cuda(), idxs.cuda(), weights.cuda()
 
-		return s, next_s, action, reward.unsqueeze(2), idxs, weights
+		return s, next_s, action, reward.unsqueeze(2), done.unsqueeze(2), done2.unsqueeze(2), idxs, weights
+
 
 # class ReplayBuffer():
 # 	"""
@@ -375,3 +380,4 @@ def linear_schedule(schdl, step):
 			mix = np.clip(step / duration, 0.0, 1.0)
 			return (1.0 - mix) * init + mix * final
 	raise NotImplementedError(schdl)
+

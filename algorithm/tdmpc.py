@@ -170,15 +170,16 @@ class TDMPC():
 		return pi_loss.item() #계산된 정책손실값 반환
 
 	@torch.no_grad()
-	def _td_target(self, next_ss, reward):
+	def _td_target(self, next_ss, reward, done):
 		"""Compute the TD-target from a reward and the observation at the following time step."""
 		td_target = reward + self.cfg.discount * \
-			torch.min(*self.model_target.Q(next_ss, self.model.pi(next_ss, self.cfg.min_std))) #reward+감가율*value(target model에서 encoding 된 obs와 action)
+			torch.min(*self.model_target.Q(next_ss, self.model.pi(next_ss, self.cfg.min_std)))*\
+				(1-done) #reward+감가율*value(target model에서 encoding 된 obs와 action)*(1-done)
 		return td_target
 
 	def update(self, replay_buffer, step):
 		"""Main update function. Corresponds to one iteration of the TOLD model learning."""
-		s, next_ses, action, reward, idxs, weights = replay_buffer.sample() #버퍼들중 무작위 값 불러와서 값들 초기화
+		s, next_ses, action, reward, done, done2, idxs, weights = replay_buffer.sample() #버퍼들중 무작위 값 불러와서 값들 초기화
 		self.optim.zero_grad(set_to_none=True)
 		self.std = h.linear_schedule(self.cfg.std_schedule, step)
 		self.model.train() #training 모드
@@ -192,13 +193,13 @@ class TDMPC():
 			Q1, Q2 = self.model.Q(s, action[t]) #state action value 뽑아냄
 			s, reward_pred = self.model.next(s, action[t]) #told 모델로부터 리워드 뽑기
 			with torch.no_grad():				
-				td_target = self._td_target(next_ses[t], reward[t]) #다음 step의 td target을 계산함
+				td_target = self._td_target(next_ses[t], reward[t], done[t]) #다음 step의 td target을 계산함
 			ss.append(s.detach())
 			# Losses
 			rho = (self.cfg.rho ** t)
-			reward_loss += rho * h.mse(reward_pred, reward[t]) #reward prediction loss ->리워드 업데이트 목적함수
-			value_loss += rho * (h.mse(Q1, td_target) + h.mse(Q2, td_target)) #value prediction loss -> value업데이트 목적함수
-			priority_loss += rho * (h.l1(Q1, td_target) + h.l1(Q2, td_target)) #리플레이 버퍼 우선순위 설정 
+			reward_loss += rho * h.mse(reward_pred, reward[t])*(1-done2[t]) #reward prediction loss ->리워드 업데이트 목적함수
+			value_loss += rho * (h.mse(Q1, td_target) + h.mse(Q2, td_target))*(1-done2[t]) #value prediction loss -> value업데이트 목적함수
+			priority_loss += rho * (h.l1(Q1, td_target) + h.l1(Q2, td_target))*(1-done2[t]) #리플레이 버퍼 우선순위 설정
 
 		# Optimize model
 		total_loss = self.cfg.reward_coef * reward_loss.clamp(max=1e4) + \

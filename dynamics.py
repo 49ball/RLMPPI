@@ -29,11 +29,17 @@ class KinematicBicycleModel:
         new_velocity = velocity + self.delta_time * acceleration
         new_velocity = torch.clamp(new_velocity, -10, 10)  # new_velocity 클램핑
         angular_velocity = new_velocity * torch.tan(steering_angle) / self.wheelbase
-        
+
         new_x = x + new_velocity * torch.cos(yaw) * self.delta_time
-        new_y = y + new_velocity * torch.sin(yaw) * self.delta_time
+        new_y = y + new_velocity * torch.sin(yaw) * self.delta_time                   
         new_yaw = yaw + angular_velocity * self.delta_time
         new_yaw = torch.remainder(new_yaw, 2 * pi)
+
+        # if torch.any(new_x <= 0) or torch.any(new_y <= 0) or torch.any(new_x >= 100) or torch.any(new_y >= 100):
+        #     new_x=x
+        #     new_y=y
+        #     new_velocity = torch.zeros_like(new_velocity)
+        #     new_yaw = yaw
         
         new_states = torch.stack((new_x, new_y, new_yaw, new_velocity), dim=1)
         

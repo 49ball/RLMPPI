@@ -1,3 +1,4 @@
+import time
 import numpy as np
 import random
 import torch
@@ -23,8 +24,9 @@ class MapWithObstacles:
     def generate_obstacles(self):
         # 지정된 위치에 장애물 생성
         self.obstacles = [
-            (10, 10), (35, 20), (45, 50), (70, 70), (50, 80),
-            (25, 35), (30, 70), (50, 30), (70, 45), (90, 50)
+            (20, 20), (40, 20), (45, 40), (60, 60), (50, 80),
+            (25, 35), (30, 70), (50, 30), (70, 45), (50, 65),
+            (80, 60), (30, 50), (70, 30), (60, 40), (90, 50)    
         ]
 
     def plot_map(self):
@@ -64,7 +66,11 @@ class MapWithObstacles:
         prev_distance_to_goal=torch.sqrt((prev_x-goal[0])**2+(prev_y-goal[1])**2)
         distance_to_goal = torch.sqrt((x - goal[0])**2 + (y - goal[1])**2)
         reward = (prev_distance_to_goal-distance_to_goal)
-        # reward = max_reward-distance_to_goal*0.01
+
+        # if (prev_distance_to_goal-distance_to_goal)==0:
+        #     reward = torch.tensor(-1.0, dtype=torch.float32, device='cuda')
+            
+        # reward = -distance_to_goal*0.01
         # reward = k_att*reward
         done = False     
         # 장애물간의 거리를 계산한 리워드
@@ -91,10 +97,10 @@ class MapWithObstacles:
             reward = torch.tensor(10.0, dtype=torch.float32, device='cuda')
             done = True
 
-        elif torch.any(x <= 0) or torch.any(x >= 100) or torch.any(y <= 0) or torch.any(y >= 100): #차가 경계선 밖을 나갈때
+        elif torch.any(x < 0) or torch.any(x > 100) or torch.any(y < 0) or torch.any(y > 100): #차가 경계선 밖을 나갈때
             reward = torch.tensor(-5.0, dtype=torch.float32, device='cuda')
             done = True
-        
+
         return reward.cpu().numpy().item(), done
 
 
