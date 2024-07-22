@@ -7,6 +7,11 @@ import re
 import numpy as np
 from termcolor import colored
 from omegaconf import OmegaConf
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation, FFMpegWriter
+from matplotlib.patches import Circle, Rectangle
+from math import sqrt, cos, sin
+from environment import MapWithObstacles
 
 CONSOLE_FORMAT = [('episode', 'E', 'int'), ('env_step', 'S', 'int'), ('episode_reward', 'R', 'float'), ('total_time', 'T', 'time')]
 AGENT_METRICS = ['reward_loss', 'value_loss', 'total_loss', 'weighted_loss', 'pi_loss', 'grad_norm']
@@ -49,33 +54,69 @@ def cfg_to_group(cfg, return_list=False):
 	return lst if return_list else '-'.join(lst)
 
 
-class VideoRecorder:
-	def __init__(self, root_dir, render_size=384, fps=15):
-		self.save_dir = root_dir
+class CarAnimationRecorder:
+	def __init__(self, wandb, csv_file, render_size=384, fps=15):
+		self.car_length = 3
+		self.car_width = 1.5
+		self._wandb=wandb
+		self.dt = 0.1
+		self.car_diagonal = sqrt((self.car_length / 2)**2 + self. car_width**2)
+		self.map_obj = MapWithObstacles()
 		self.render_size = render_size
 		self.fps = fps
+		self.states = []
 		self.frames = []
 		self.enabled = False
 
 	def init(self, enabled=True):
 		self.frames = []
-		self.enabled = self.save_dir and enabled
+		self.states = []
+		self.enabled = enabled
 
-	def record(self, fig):
+	def record(self, state):
 		if self.enabled:
+			fig, ax = plt.subplots(figsize=(10, 10))
+			self.map_obj.plot_map(ax)
+			car_marker = Rectangle((0, 0), width=self.car_length, height=self.car_width, fc='red', ec='black', angle=0)
+			ax.add_patch(car_marker)
+			line, = ax.plot([], [], 'b-', label='Path of the car')
+
+			x, y, theta = state[0].item(), state[1].item(), state[2].item()
+
+			line.set_data(x,y)
+			x_dif = (self.car_length / self.car_diagonal) * cos(theta) - (self.car_width / self.car_diagonal) * sin(theta)
+			y_dif = (self.car_width / self.car_diagonal) * cos(theta) + (self.car_length / self.car_diagonal) * sin(theta)
+			car_marker.set_xy([x - self.car_diagonal * x_dif / 2, y - self.car_diagonal * y_dif / 2])
+			car_marker.angle = np.rad2deg(theta)
+
+			ax.scatter(0, 0, color='red', s=180, label='Start')
+			ax.scatter(100, 100, color='green', s=180, label='Goal')
+			ax.set_xlim(0, 100)
+			ax.set_ylim(0, 100)
+			ax.set_xlabel('X position (m)')
+			ax.set_ylabel('Y position (m)')
+			ax.set_title('Car Path Simulation')
+			ax.legend()
+			ax.grid()
+			ax.axis('equal')
+
 			fig.canvas.draw()
-			frame = np.frombuffer(fig.canvas.tostring_rgb(), dtype='uint8')
-			frame = frame.reshape(fig.canvas.get_width_height()[::-1] + (3,))
-			self.frames.append(frame)
+			image = np.frombuffer(fig.canvas.tostring_rgb(), dtype='uint8')
+			image = image.reshape(fig.canvas.get_width_height()[::-1] + (3,))
+			self.frames.append(image)
+			plt.close(fig)
 
 	def save(self, step):
 		if self.enabled:
 			frames = np.stack(self.frames).transpose(0, 3, 1, 2)
-			wandb.log({'eval_video': wandb.Video(frames, fps=self.fps, format='mp4')}, step=step)
+			self._wandb.log({'eval_video': self._wandb.Video(frames, fps=self.fps, format='mp4')}, step=step)
+			print("Animation saved successfully")
+
 
 class Logger:
-	def __init__(self, log_dir, cfg):
+	def __init__(self, log_dir, eval_dir, cfg):
 		self._log_dir = make_dir(log_dir)
+		self._eval_dir = make_dir(eval_dir)
 		self._model_dir = make_dir(self._log_dir / 'models')
 		self._save_model = cfg.save_model
 		self._group = cfg_to_group(cfg)
@@ -103,7 +144,7 @@ class Logger:
 			except:
 				print(colored('Warning: failed to init wandb. Logs will be saved locally.', 'yellow'), attrs=['bold'])
 				self._wandb = None
-		self._video = VideoRecorder(log_dir, self._wandb) if self._wandb and cfg.save_video else None
+		self._video = CarAnimationRecorder(self._wandb, eval_dir) if self._wandb and cfg.save_video else None
 
 	@property
 	def video(self):

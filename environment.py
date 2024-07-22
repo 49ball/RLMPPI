@@ -26,11 +26,11 @@ class MapWithObstacles:
         self.obstacles = [
             (20, 20), (40, 20), (45, 40), (60, 60), (50, 80),
             (25, 35), (30, 70), (50, 30), (70, 45), (50, 65),
-            (80, 60), (30, 50), (70, 30), (60, 40), (90, 50)    
+            (80, 60), (30, 50), (70, 30), (60, 40), (90, 50),
+            (50, 36), (20, 28), (40, 60), (60, 67)    
         ]
 
-    def plot_map(self):
-        fig, ax = plt.subplots(figsize=(10, 10))
+    def plot_map(self, ax):
         ax.set_xlim(0, self.map_size)
         ax.set_ylim(0, self.map_size)
 
@@ -42,7 +42,7 @@ class MapWithObstacles:
         ax.set_ylabel('Y position')
         ax.set_title(f'{self.map_size}x{self.map_size} Map with Circular Obstacles')
         plt.grid(True)
-        plt.show()
+        #plt.show()
 
     def calculate_reward(self, states, prev_states):
         if len(states.shape) == 1:
@@ -65,21 +65,19 @@ class MapWithObstacles:
         # 목표 지점관련 리워드
         prev_distance_to_goal=torch.sqrt((prev_x-goal[0])**2+(prev_y-goal[1])**2)
         distance_to_goal = torch.sqrt((x - goal[0])**2 + (y - goal[1])**2)
-        reward = (prev_distance_to_goal-distance_to_goal)
-
-        # if (prev_distance_to_goal-distance_to_goal)==0:
-        #     reward = torch.tensor(-1.0, dtype=torch.float32, device='cuda')
-            
-        # reward = -distance_to_goal*0.01
+        # reward = (prev_distance_to_goal-distance_to_goal)    
+        #           
+        reward = max_reward-distance_to_goal*0.01
         # reward = k_att*reward
         done = False     
         # 장애물간의 거리를 계산한 리워드
         obstacles = torch.tensor(self.obstacles, dtype=torch.float32, device='cuda')
         obs_x = obstacles[:, 0].view(1, -1)
         obs_y = obstacles[:, 1].view(1, -1)
-        # distance_to_obstacles = ((x.view(-1, 1) - obs_x)**2 + (y.view(-1, 1) - obs_y)**2).clone().detach()
-        # Cost = torch.exp(-(((x.view(-1, 1) - obs_x)**2 / sigma_x**2) + ((y.view(-1, 1) - obs_y)**2 / sigma_y**2)))
-        # reward -= k_obs * torch.sum(Cost, dim=1)*0.01
+        obstacles_dist = ((x.view(-1, 1) - obs_x)**2 + (y.view(-1, 1) - obs_y)**2).clone().detach()
+        distance_to_obstacles=torch.sqrt(obstacles_dist)      
+        Cost = torch.exp(-(((x.view(-1, 1) - obs_x)**2 / sigma_x**2) + ((y.view(-1, 1) - obs_y)**2 / sigma_y**2)))
+        reward -= k_obs * torch.sum(Cost, dim=1)*0.01
 
         #차량 속도와 관련된 리워드
        # speed_reward = torch.clamp(v / 3.0, 0.0, 1.0) #속도 리워드 정규화(0에서3)
@@ -90,14 +88,14 @@ class MapWithObstacles:
         #     speed_reward = 0.1
         # reward += speed_reward
 
-        # if torch.any(distance_to_obstacles < 3.5, dim=1): #차가 장애물과의 거리가 너무 가까울땐 중단
-        #     done =True
+        if torch.any(distance_to_obstacles < 3.5, dim=1): #차가 장애물과의 거리가 너무 가까울땐 중단
+            done =True
 
         if distance_to_goal <=0.5: #차가 목표지점에 도착했을때
             reward = torch.tensor(10.0, dtype=torch.float32, device='cuda')
             done = True
 
-        elif torch.any(x < 0) or torch.any(x > 100) or torch.any(y < 0) or torch.any(y > 100): #차가 경계선 밖을 나갈때
+        elif torch.any(x < -5) or torch.any(x > 105) or torch.any(y < -5) or torch.any(y > 105): #차가 경계선 밖을 나갈때
             reward = torch.tensor(-5.0, dtype=torch.float32, device='cuda')
             done = True
 

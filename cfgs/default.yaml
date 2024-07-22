@@ -1,5 +1,5 @@
 #project
-project : "test2"
+project : "test"
 
 # environment
 task: car
@@ -50,7 +50,7 @@ wandb_entity: "49ball-Seoul National University" #team project name
 # mis(miscellaneous))
 seed: 1
 exp_name: default
-eval_freq: 50000
+eval_freq: 100000
 eval_episodes: 10
 save_video: true
 save_model: true

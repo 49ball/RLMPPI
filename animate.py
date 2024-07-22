@@ -22,15 +22,16 @@ class MapWithObstacles:
         self.obstacles = [
             (20, 20), (40, 20), (45, 40), (60, 60), (50, 80),
             (25, 35), (30, 70), (50, 30), (70, 45), (50, 65),
-            (80, 60), (30, 50), (70, 30), (60, 40), (90, 50)
+            (80, 60), (30, 50), (70, 30), (60, 40), (90, 50),
+            (50, 36), (20, 28), (40, 60), (60, 67)    
         ]
 
     def plot_map(self, ax):
         ax.set_xlim(0, self.map_size)
         ax.set_ylim(0, self.map_size)
-        # for (x, y) in self.obstacles:
-        #     circle = Circle((x, y), self.obstacle_radius, fc='gray', edgecolor='black')
-        #     ax.add_patch(circle)
+        for (x, y) in self.obstacles:
+            circle = Circle((x, y), self.obstacle_radius, fc='gray', edgecolor='black')
+            ax.add_patch(circle)
         ax.set_xlabel('X position')
         ax.set_ylabel('Y position')
         ax.set_title(f'{self.map_size}x{self.map_size} Map with Circular Obstacles')
@@ -85,13 +86,13 @@ class CarAnimation:
 car_length = 3.0  # 차량의 길이(미터)
 car_width = 1.5   # 차량의 너비(미터)
 dt = 0.1  # 시간 간격(초)
-csv_file = './logs/car/eval/test2/3/states_3_4_(134).csv'  # 입력 데이터 파일 경로
+csv_file = './logs/car/eval/obstacle_change_maxreward_dist/21/states_21_4_(105).csv'  # 입력 데이터 파일 경로
 
 # 맵 생성
 map_with_obstacles = MapWithObstacles()
 fig, ax = plt.subplots(figsize=(10, 10))
-# map_with_obstacles.plot_map(ax)
-# plt.show()
+#map_with_obstacles.plot_map(ax)
+#plt.show()
 # 애니메이션 생성 및 저장
 car_animation = CarAnimation(csv_file, car_length, car_width, dt, map_with_obstacles)
 car_animation.plot_simulation()
