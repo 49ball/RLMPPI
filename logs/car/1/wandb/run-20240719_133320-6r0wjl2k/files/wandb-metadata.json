@@ -1,0 +1,168 @@
+{
+    "os": "Linux-6.5.0-41-generic-x86_64-with-glibc2.17",
+    "python": "3.8.19",
+    "heartbeatAt": "2024-07-19T04:33:20.814126",
+    "startedAt": "2024-07-19T04:33:20.143500",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "train.py",
+    "codePathLocal": "train.py",
+    "codePath": "train.py",
+    "git": {
+        "remote": "https://github.com/49ball/RLMPPI.git",
+        "commit": "043e75067055bca10995de29eac12e489c958e6a"
+    },
+    "email": "49ball@naver.com",
+    "root": "/home/jeongtae/RLMPPI/src",
+    "host": "jeongtae-B760MZ-E-PRO",
+    "username": "jeongtae",
+    "executable": "/home/jeongtae/anaconda3/envs/RLMPPI/bin/python3",
+    "cpu_count": 16,
+    "cpu_count_logical": 24,
+    "cpu_freq": {
+        "current": 1280.4599166666667,
+        "min": 800.0,
+        "max": 4783.333333333333
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2175.272,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 798.928,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 2173.942,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 1442.697,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 1848.35,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 1934.262,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 2138.662,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 2070.291,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 2080.882,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 2157.311,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 2136.907,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 1805.79,
+            "min": 800.0,
+            "max": 4100.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 4100.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 4100.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 4100.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 4100.0
+        },
+        {
+            "current": 802.12,
+            "min": 800.0,
+            "max": 4100.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 4100.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 4100.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 491.082275390625,
+            "used": 240.64861297607422
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 3060",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 3060",
+            "memory_total": 12884901888
+        }
+    ],
+    "memory": {
+        "total": 31.111347198486328
+    }
+}

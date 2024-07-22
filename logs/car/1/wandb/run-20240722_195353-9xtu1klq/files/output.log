@@ -1,0 +1,22 @@
+
+[34m[1mLogs will be synced with wandb.
+Traceback (most recent call last):
+  File "train.py", line 146, in <module>
+    train(parse_cfg(Path().cwd() / __CONFIG__))
+  File "train.py", line 92, in train
+    L=logger.Logger(work_dir, eval_dir, cfg) #로거 시작, wandb 연결
+  File "/home/jeongtae/RLMPPI/src/logger.py", line 170, in __init__
+    self._video = CarAnimationRecorder(self._wandb, eval_dir) if self._wandb and cfg.save_video else None
+  File "/home/jeongtae/RLMPPI/src/logger.py", line 87, in __init__
+    self.positions = pd.read_csv(csv_file, delimiter='\t').values[1:, :3]
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 912, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 577, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 1407, in __init__
+    self._engine = self._make_engine(f, self.engine)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 1661, in _make_engine
+    self.handles = get_handle(
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/pandas/io/common.py", line 859, in get_handle
+    handle = open(
+IsADirectoryError: [Errno 21] Is a directory: '/home/jeongtae/RLMPPI/src/logs/car/eval/test'

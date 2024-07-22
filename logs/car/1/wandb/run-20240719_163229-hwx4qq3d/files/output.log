@@ -1,0 +1,22 @@
+[34m[1mLogs will be synced with wandb.
+ [34mtrain[39m   [30mE:[39m 1                [30mS:[39m 0                [30mR:[39m -5.0             [30mT:[39m 0:00:00
+ [32meval[39m    [30mE:[39m 1                [30mS:[39m 0                [30mR:[39m -3.5             [30mT:[39m 0:00:00
+ [34mtrain[39m   [30mE:[39m 2                [30mS:[39m 1,000            [30mR:[39m -5.0             [30mT:[39m 0:00:07
+ [34mtrain[39m   [30mE:[39m 3                [30mS:[39m 2,000            [30mR:[39m -4.9             [30mT:[39m 0:00:08
+ [34mtrain[39m   [30mE:[39m 4                [30mS:[39m 3,000            [30mR:[39m -5.0             [30mT:[39m 0:00:08
+ [34mtrain[39m   [30mE:[39m 5                [30mS:[39m 4,000            [30mR:[39m -5.0             [30mT:[39m 0:00:08
+ [34mtrain[39m   [30mE:[39m 6                [30mS:[39m 5,000            [30mR:[39m -5.0             [30mT:[39m 0:00:08
+ [34mtrain[39m   [30mE:[39m 7                [30mS:[39m 6,000            [30mR:[39m -5.0             [30mT:[39m 0:00:08
+ [34mtrain[39m   [30mE:[39m 8                [30mS:[39m 7,000            [30mR:[39m -5.0             [30mT:[39m 0:00:08
+ [34mtrain[39m   [30mE:[39m 9                [30mS:[39m 8,000            [30mR:[39m 1.3              [30mT:[39m 0:00:08
+ [34mtrain[39m   [30mE:[39m 10               [30mS:[39m 9,000            [30mR:[39m -5.0             [30mT:[39m 0:00:08
+Traceback (most recent call last):
+  File "train.py", line 146, in <module>
+    train(parse_cfg(Path().cwd() / __CONFIG__))
+  File "train.py", line 114, in train
+    train_metrics.update(agent.update(buffer,step+i))
+  File "/home/jeongtae/RLMPPI/src/algorithm/tdmpc.py", line 213, in update
+    pi_loss = self.update_pi(ss) #policy의 loss 반환 및 policy 모델 파라미터 업데이트
+  File "/home/jeongtae/RLMPPI/src/algorithm/tdmpc.py", line 170, in update_pi
+    return pi_loss.item() #계산된 정책손실값 반환
+KeyboardInterrupt

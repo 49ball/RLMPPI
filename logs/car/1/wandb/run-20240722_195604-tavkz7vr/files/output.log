@@ -1,0 +1,19 @@
+[34m[1mLogs will be synced with wandb.
+ [34mtrain[39m   [30mE:[39m 1                [30mS:[39m 0                [30mR:[39m -5.7             [30mT:[39m 0:00:00
+> /home/jeongtae/RLMPPI/src/train.py(49)evaluate()
+-> if video: video.record(s)
+tensor([-7.6651e-04, -6.5360e-04,  7.0600e-01, -1.0073e-02], device='cuda:0')
+Traceback (most recent call last):
+  File "train.py", line 147, in <module>
+    train(parse_cfg(Path().cwd() / __CONFIG__))
+  File "train.py", line 138, in train
+    common_metrics['episode_reward'] = evaluate(env, agent, cfg.eval_episodes, step, env_step ,eval_numbering, cfg, L.video)
+  File "train.py", line 49, in evaluate
+    if video: video.record(s)
+  File "train.py", line 49, in evaluate
+    if video: video.record(s)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/bdb.py", line 88, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/bdb.py", line 113, in dispatch_line
+    if self.quitting: raise BdbQuit
+bdb.BdbQuit

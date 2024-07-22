@@ -1,0 +1,28 @@
+[34m[1mLogs will be synced with wandb.
+ [34mtrain[39m   [30mE:[39m 1                [30mS:[39m 0                [30mR:[39m -5.7             [30mT:[39m 0:00:00
+0.926276445388794
+2.257288932800293
+1.3022723197937012
+1.473343849182129
+3.999876022338867
+4.022887468338013
+1.0242526531219482
+0.7847802639007568
+4.0529327392578125
+1.105175495147705
+ [32meval[39m    [30mE:[39m 1                [30mS:[39m 0                [30mR:[39m 19.4             [30mT:[39m 0:00:00
+ [34mtrain[39m   [30mE:[39m 2                [30mS:[39m 1,000            [30mR:[39m 43.0             [30mT:[39m 0:00:21
+ [34mtrain[39m   [30mE:[39m 3                [30mS:[39m 2,000            [30mR:[39m -6.9             [30mT:[39m 0:00:21
+ [34mtrain[39m   [30mE:[39m 4                [30mS:[39m 3,000            [30mR:[39m -6.8             [30mT:[39m 0:00:21
+ [34mtrain[39m   [30mE:[39m 5                [30mS:[39m 4,000            [30mR:[39m -6.3             [30mT:[39m 0:00:22
+ [34mtrain[39m   [30mE:[39m 6                [30mS:[39m 5,000            [30mR:[39m -5.8             [30mT:[39m 0:00:22
+Traceback (most recent call last):
+  File "train.py", line 185, in <module>
+    train(parse_cfg(Path().cwd() / __CONFIG__))
+  File "train.py", line 138, in train
+    s, reward, done, _ = env.step(action) #다음 state, reward, 끝났는지 확인 ->step으로 episode가 done 이 될때까지!!!!!!!!!!!!!!!!!
+  File "/home/jeongtae/RLMPPI/src/environment.py", line 125, in step
+    reward,done =self.map.calculate_reward(self.state,prev_state)
+  File "/home/jeongtae/RLMPPI/src/environment.py", line 55, in calculate_reward
+    prev_x, prev_y, prev_v = prev_states[:, 0], prev_states[:, 1], prev_states[:, 3]
+KeyboardInterrupt

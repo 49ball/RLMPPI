@@ -1,0 +1,21 @@
+[34m[1mLogs will be synced with wandb.
+ [34mtrain[39m   [30mE:[39m 1                [30mS:[39m 0                [30mR:[39m -5.7             [30mT:[39m 0:00:00
+Animation saved successfully
+ [32meval[39m    [30mE:[39m 1                [30mS:[39m 0                [30mR:[39m -0.9             [30mT:[39m 0:00:00
+ [34mtrain[39m   [30mE:[39m 2                [30mS:[39m 1,000            [30mR:[39m 44.8             [30mT:[39m 0:00:53
+ [34mtrain[39m   [30mE:[39m 3                [30mS:[39m 2,000            [30mR:[39m 110.8            [30mT:[39m 0:00:54
+ [34mtrain[39m   [30mE:[39m 4                [30mS:[39m 3,000            [30mR:[39m -5.8             [30mT:[39m 0:00:54
+ [34mtrain[39m   [30mE:[39m 5                [30mS:[39m 4,000            [30mR:[39m -2.1             [30mT:[39m 0:00:54
+ [34mtrain[39m   [30mE:[39m 6                [30mS:[39m 5,000            [30mR:[39m -5.7             [30mT:[39m 0:00:54
+ [34mtrain[39m   [30mE:[39m 7                [30mS:[39m 6,000            [30mR:[39m 23.8             [30mT:[39m 0:00:54
+ [34mtrain[39m   [30mE:[39m 8                [30mS:[39m 7,000            [30mR:[39m -10.3            [30mT:[39m 0:00:55
+Traceback (most recent call last):
+  File "train.py", line 146, in <module>
+    train(parse_cfg(Path().cwd() / __CONFIG__))
+  File "train.py", line 100, in train
+    episode += (s, action, reward, done, 0)
+  File "/home/jeongtae/RLMPPI/src/algorithm/helper.py", line 168, in __add__
+    self.add(*transition)
+  File "/home/jeongtae/RLMPPI/src/algorithm/helper.py", line 172, in add
+    self.s[self._idx+1] = torch.tensor(s, dtype=self.s.dtype, device=self.s.device)
+KeyboardInterrupt

@@ -1,0 +1,1 @@
+{"train/episode": 10, "_timestamp": 1721374359.4858785, "train/step": 4500, "train/env_step": 9000, "train/total_time": 8.284601211547852, "train/episode_reward": -5.0, "eval/episode": 1, "eval/step": 0, "eval/env_step": 0, "eval/total_time": 0.09298372268676758, "eval/episode_reward": -3.503099060058594, "_runtime": 10.05854845046997, "_step": 9000, "_wandb": {"runtime": 12}}

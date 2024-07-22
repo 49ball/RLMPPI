@@ -20,8 +20,10 @@ class MapWithObstacles:
     def generate_obstacles(self):
         # 지정된 위치에 장애물 생성
         self.obstacles = [
-            (10, 10), (35, 20), (45, 50), (70, 70), (50, 80),
-            (25, 35), (30, 70), (50, 30), (70, 45), (90, 50)
+            (20, 20), (40, 20), (45, 40), (60, 60), (50, 80),
+            (25, 35), (30, 70), (50, 30), (70, 45), (50, 65),
+            (80, 60), (30, 50), (70, 30), (60, 40), (90, 50),
+            (50, 36), (20, 28), (40, 60), (60, 67)    
         ]
 
     def plot_map(self, ax):
@@ -66,8 +68,8 @@ class CarAnimation:
             return line, car_marker
 
         ani = FuncAnimation(fig, update, frames=len(self.positions), init_func=init, blit=True, interval=self.dt * 1000)
-        ax.scatter(0, 0, color='red', s=100, label='Start')
-        ax.scatter(100, 100, color='green', s=100, label='Goal')
+        ax.scatter(0, 0, color='red', s=180, label='Start')
+        ax.scatter(100, 100, color='green', s=180, label='Goal')
         ax.set_xlim(0, 100)
         ax.set_xlim(0, 100)
         ax.set_xlabel('X position (m)')
@@ -84,11 +86,13 @@ class CarAnimation:
 car_length = 3.0  # 차량의 길이(미터)
 car_width = 1.5   # 차량의 너비(미터)
 dt = 0.1  # 시간 간격(초)
-csv_file = './logs/car/eval/1/states_1_1_(-144).csv'  # 입력 데이터 파일 경로
+csv_file = './logs/car/eval/obstacle_change_maxreward_dist/21/states_21_4_(105).csv'  # 입력 데이터 파일 경로
 
 # 맵 생성
 map_with_obstacles = MapWithObstacles()
-
+fig, ax = plt.subplots(figsize=(10, 10))
+#map_with_obstacles.plot_map(ax)
+#plt.show()
 # 애니메이션 생성 및 저장
 car_animation = CarAnimation(csv_file, car_length, car_width, dt, map_with_obstacles)
 car_animation.plot_simulation()
