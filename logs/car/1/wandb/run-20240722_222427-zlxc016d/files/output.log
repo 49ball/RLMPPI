@@ -1,0 +1,26 @@
+[34m[1mLogs will be synced with wandb.
+map generated
+ [34mtrain[39m   [30mE:[39m 1                [30mS:[39m 0                [30mR:[39m -11.3            [30mT:[39m 0:00:00
+map generated
+Traceback (most recent call last):
+  File "train.py", line 144, in <module>
+    train(parse_cfg(Path().cwd() / __CONFIG__))
+  File "train.py", line 135, in train
+    common_metrics['episode_reward'] = evaluate(env, agent, cfg.eval_episodes, step, env_step ,eval_numbering, cfg, L.video)
+  File "train.py", line 48, in evaluate
+    if video: video.record(s)
+  File "/home/jeongtae/RLMPPI/src/logger.py", line 79, in record
+    self.map_obj.plot_map(ax)
+  File "/home/jeongtae/RLMPPI/src/environment.py", line 41, in plot_map
+    plt.show()
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/matplotlib/pyplot.py", line 446, in show
+    return _get_backend_mod().show(*args, **kwargs)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/matplotlib/backend_bases.py", line 3620, in show
+    cls.mainloop()
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/matplotlib/backends/backend_qt.py", line 603, in start_main_loop
+    qt_compat._exec(qapp)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/contextlib.py", line 120, in __exit__
+    next(self.gen)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/matplotlib/backends/qt_compat.py", line 245, in _maybe_allow_interrupt
+    old_sigint_handler(*handler_args)
+KeyboardInterrupt

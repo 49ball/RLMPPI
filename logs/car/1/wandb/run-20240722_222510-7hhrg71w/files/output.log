@@ -1,0 +1,16 @@
+[34m[1mLogs will be synced with wandb.
+map generated
+ [34mtrain[39m   [30mE:[39m 1                [30mS:[39m 0                [30mR:[39m -11.3            [30mT:[39m 0:00:00
+map generated
+Traceback (most recent call last):
+  File "train.py", line 144, in <module>
+    train(parse_cfg(Path().cwd() / __CONFIG__))
+  File "train.py", line 135, in train
+    common_metrics['episode_reward'] = evaluate(env, agent, cfg.eval_episodes, step, env_step ,eval_numbering, cfg, L.video)
+  File "train.py", line 44, in evaluate
+    action = agent.plan(s, eval_mode=True, step=step, t0=t == 0)
+  File "/home/jeongtae/anaconda3/envs/RLMPPI/lib/python3.8/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/jeongtae/RLMPPI/src/algorithm/tdmpc.py", line 143, in plan
+    score = score.squeeze(1).cpu().numpy() #점수텐서를 1차원으로 변환하고 확률분포 기반 샘플링을 위해 numpy로 변환
+KeyboardInterrupt

@@ -35,7 +35,7 @@ def evaluate(env, agent, num_episodes, step, env_step, eval_numbering, cfg, vide
 		states = []
 		with open(temp_file_path, mode='w', newline='') as temp_file:
 			writer = csv.writer(temp_file, delimiter='\t')
-			s, done, ep_reward, t = env.reset(env_step), False, 0, 0
+			s, done, ep_reward, t = env.reset(1), False, 0, 0
 			obstacle_str = ','.join(f'({x},{y})' for x, y in env.map.obstacles)
 			writer.writerow([obstacle_str])
 			states.append(s.tolist())  # 초기 상태 저장
@@ -45,7 +45,7 @@ def evaluate(env, agent, num_episodes, step, env_step, eval_numbering, cfg, vide
 				s, reward, done, _ = env.step(action)
 				states.append(s.tolist())  # 상태를 메모리에 저장
 				ep_reward += reward
-				if video: video.record(s)
+				if video: video.record(s, env.map.obstacles)
 				t += 1
 			writer.writerows(states)  # 모든 상태를 한 번에 파일에 저장		
 		# 에피소드가 끝난 후 파일 이름을 변경하여 보상을 포함
@@ -134,7 +134,8 @@ def train(cfg):
 		if env_step % cfg.eval_freq == 0:
 			common_metrics['episode_reward'] = evaluate(env, agent, cfg.eval_episodes, step, env_step ,eval_numbering, cfg, L.video)
 			eval_numbering+=1
-			L.log(common_metrics, category='eval') 
+			L.log(common_metrics, category='eval')
+		env.obs_reset(int(step*cfg.action_repeat)) 
 
 	L.finish(agent) #끝나는 프린트 구문
 	print('Training completed successfully')

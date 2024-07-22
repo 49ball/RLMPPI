@@ -26,11 +26,11 @@ class MapWithObstacles:
         y = torch.randint(self.map_size - 90, self.map_size - 10, (self.obstacle_count,), device=self.device)
         self.obstacles = [(int(xi), int(yi)) for xi, yi in zip(x, y)]
 
-    def plot_map(self, ax):
+    def plot_map(self, ax, obstacles):
         ax.set_xlim(0, self.map_size)
         ax.set_ylim(0, self.map_size)
 
-        for (x, y) in self.obstacles:
+        for (x, y) in obstacles:
             circle = Circle((x, y), self.obstacle_radius, fc='gray', edgecolor='black')
             ax.add_patch(circle)
 
@@ -38,7 +38,7 @@ class MapWithObstacles:
         ax.set_ylabel('Y position')
         ax.set_title(f'{self.map_size}x{self.map_size} Map with Circular Obstacles')
         plt.grid(True)
-        plt.show()
+       # plt.show()
 
     def calculate_reward(self, states, prev_states):
         if len(states.shape) == 1:
@@ -61,9 +61,9 @@ class MapWithObstacles:
         # 목표 지점관련 리워드
         prev_distance_to_goal=torch.sqrt((prev_x-goal[0])**2+(prev_y-goal[1])**2)
         distance_to_goal = torch.sqrt((x - goal[0])**2 + (y - goal[1])**2)
-        # reward = (prev_distance_to_goal-distance_to_goal)    
+        reward = (prev_distance_to_goal-distance_to_goal)    
         #           
-        reward = max_reward-distance_to_goal*0.01
+        # reward = max_reward-distance_to_goal*0.01
         # reward = k_att*reward
         done = False     
         # 장애물간의 거리를 계산한 리워드
@@ -89,11 +89,11 @@ class MapWithObstacles:
             done =True
 
         if distance_to_goal <=0.5: #차가 목표지점에 도착했을때
-            reward = torch.tensor(10.0, dtype=torch.float32, device='cuda')
+            reward = torch.tensor(100.0, dtype=torch.float32, device='cuda')
             done = True
 
         elif torch.any(x < -5) or torch.any(x > 105) or torch.any(y < -5) or torch.any(y > 105): #차가 경계선 밖을 나갈때
-            reward = torch.tensor(-5.0, dtype=torch.float32, device='cuda')
+            reward = torch.tensor(-100.0, dtype=torch.float32, device='cuda')
             done = True
 
         return reward.cpu().numpy().item(), done
@@ -109,12 +109,17 @@ class Env(object):
         self.model = KinematicBicycleModel()
         self.t = 0
 
-    def reset(self, step):
+    def obs_reset(self, step):
         # 환경을 초기화하는 메서드
-        self.state = torch.tensor([0.0, 0.0, random.uniform(0, pi / 2), 0.0], device='cuda')
         if step %100000 == 0:
             self.map.generate_obstacles()
             print("map generated")
+    
+    def reset(self, step):
+        # 환경을 초기화하는 메서드
+        self.state = torch.tensor([0.0, 0.0, random.uniform(0, pi / 2), 0.0], device='cuda')
+        if step == 0:
+            self.map.generate_obstacles()
         self.t = 0
         return self.observe()
 
@@ -130,6 +135,7 @@ class Env(object):
     def observe(self):
         # 현재 환경 상태를 반환하는 메서드
         return self.state
+
     @staticmethod
     def make_env(cfg):
         # 환경 초기화

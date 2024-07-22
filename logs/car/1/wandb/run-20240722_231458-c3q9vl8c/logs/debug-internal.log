@@ -1,0 +1,200 @@
+2024-07-22 23:14:58,420 INFO    StreamThr :3060771 [internal.py:wandb_internal():85] W&B internal server running at pid: 3060771, started at: 2024-07-22 23:14:58.420657
+2024-07-22 23:14:58,422 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: status
+2024-07-22 23:14:58,424 INFO    WriterThread:3060771 [datastore.py:open_for_write():87] open: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240722_231458-c3q9vl8c/run-c3q9vl8c.wandb
+2024-07-22 23:14:58,424 DEBUG   SenderThread:3060771 [sender.py:send():379] send: header
+2024-07-22 23:14:58,437 DEBUG   SenderThread:3060771 [sender.py:send():379] send: run
+2024-07-22 23:14:58,907 INFO    SenderThread:3060771 [dir_watcher.py:__init__():211] watching files in: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240722_231458-c3q9vl8c/files
+2024-07-22 23:14:58,907 INFO    SenderThread:3060771 [sender.py:_start_run_threads():1188] run started: c3q9vl8c with start time 1721657698.42055
+2024-07-22 23:14:58,914 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: check_version
+2024-07-22 23:14:58,914 DEBUG   SenderThread:3060771 [sender.py:send_request():406] send_request: check_version
+2024-07-22 23:14:58,964 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: run_start
+2024-07-22 23:14:58,971 DEBUG   HandlerThread:3060771 [system_info.py:__init__():26] System info init
+2024-07-22 23:14:58,971 DEBUG   HandlerThread:3060771 [system_info.py:__init__():41] System info init done
+2024-07-22 23:14:58,971 INFO    HandlerThread:3060771 [system_monitor.py:start():194] Starting system monitor
+2024-07-22 23:14:58,971 INFO    SystemMonitor:3060771 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-07-22 23:14:58,971 INFO    HandlerThread:3060771 [system_monitor.py:probe():214] Collecting system info
+2024-07-22 23:14:58,971 INFO    SystemMonitor:3060771 [interfaces.py:start():188] Started cpu monitoring
+2024-07-22 23:14:58,972 INFO    SystemMonitor:3060771 [interfaces.py:start():188] Started disk monitoring
+2024-07-22 23:14:58,972 INFO    SystemMonitor:3060771 [interfaces.py:start():188] Started gpu monitoring
+2024-07-22 23:14:58,972 INFO    SystemMonitor:3060771 [interfaces.py:start():188] Started memory monitoring
+2024-07-22 23:14:58,973 INFO    SystemMonitor:3060771 [interfaces.py:start():188] Started network monitoring
+2024-07-22 23:14:58,978 DEBUG   HandlerThread:3060771 [system_info.py:probe():152] Probing system
+2024-07-22 23:14:58,983 DEBUG   HandlerThread:3060771 [system_info.py:_probe_git():137] Probing git
+2024-07-22 23:14:58,990 DEBUG   HandlerThread:3060771 [system_info.py:_probe_git():145] Probing git done
+2024-07-22 23:14:58,990 DEBUG   HandlerThread:3060771 [system_info.py:probe():200] Probing system done
+2024-07-22 23:14:58,990 DEBUG   HandlerThread:3060771 [system_monitor.py:probe():223] {'os': 'Linux-6.5.0-41-generic-x86_64-with-glibc2.17', 'python': '3.8.19', 'heartbeatAt': '2024-07-22T14:14:58.978884', 'startedAt': '2024-07-22T14:14:58.417302', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': 'train.py', 'codePathLocal': 'train.py', 'codePath': 'train.py', 'git': {'remote': 'https://github.com/49ball/RLMPPI.git', 'commit': 'dc268df5b1e18472f4e63706f95050e525d72dbb'}, 'email': '49ball@naver.com', 'root': '/home/jeongtae/RLMPPI/src', 'host': 'jeongtae-B760MZ-E-PRO', 'username': 'jeongtae', 'executable': '/home/jeongtae/anaconda3/envs/RLMPPI/bin/python3', 'cpu_count': 16, 'cpu_count_logical': 24, 'cpu_freq': {'current': 1862.9787916666671, 'min': 800.0, 'max': 4783.333333333333}, 'cpu_freq_per_core': [{'current': 3618.878, 'min': 800.0, 'max': 5100.0}, {'current': 1765.573, 'min': 800.0, 'max': 5100.0}, {'current': 5053.289, 'min': 800.0, 'max': 5100.0}, {'current': 800.0, 'min': 800.0, 'max': 5100.0}, {'current': 3496.77, 'min': 800.0, 'max': 5100.0}, {'current': 800.0, 'min': 800.0, 'max': 5100.0}, {'current': 4393.519, 'min': 800.0, 'max': 5100.0}, {'current': 800.0, 'min': 800.0, 'max': 5100.0}, {'current': 4562.328, 'min': 800.0, 'max': 5200.0}, {'current': 2423.796, 'min': 800.0, 'max': 5200.0}, {'current': 3673.884, 'min': 800.0, 'max': 5200.0}, {'current': 5056.617, 'min': 800.0, 'max': 5200.0}, {'current': 5069.372, 'min': 800.0, 'max': 5100.0}, {'current': 800.0, 'min': 800.0, 'max': 5100.0}, {'current': 4423.493, 'min': 800.0, 'max': 5100.0}, {'current': 2243.426, 'min': 800.0, 'max': 5100.0}, {'current': 2018.87, 'min': 800.0, 'max': 4100.0}, {'current': 1170.338, 'min': 800.0, 'max': 4100.0}, {'current': 1064.514, 'min': 800.0, 'max': 4100.0}, {'current': 800.0, 'min': 800.0, 'max': 4100.0}, {'current': 800.0, 'min': 800.0, 'max': 4100.0}, {'current': 2462.251, 'min': 800.0, 'max': 4100.0}, {'current': 800.0, 'min': 800.0, 'max': 4100.0}, {'current': 800.0, 'min': 800.0, 'max': 4100.0}], 'disk': {'/': {'total': 491.082275390625, 'used': 241.08615112304688}}, 'gpu': 'NVIDIA GeForce RTX 3060', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 3060', 'memory_total': 12884901888}], 'memory': {'total': 31.111347198486328}}
+2024-07-22 23:14:58,990 INFO    HandlerThread:3060771 [system_monitor.py:probe():224] Finished collecting system info
+2024-07-22 23:14:58,990 INFO    HandlerThread:3060771 [system_monitor.py:probe():227] Publishing system info
+2024-07-22 23:14:58,990 DEBUG   HandlerThread:3060771 [system_info.py:_save_conda():209] Saving list of conda packages installed into the current environment
+2024-07-22 23:14:59,908 INFO    Thread-12 :3060771 [dir_watcher.py:_on_file_created():271] file/dir created: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240722_231458-c3q9vl8c/files/conda-environment.yaml
+2024-07-22 23:15:00,259 DEBUG   HandlerThread:3060771 [system_info.py:_save_conda():224] Saving conda packages done
+2024-07-22 23:15:00,259 INFO    HandlerThread:3060771 [system_monitor.py:probe():229] Finished publishing system info
+2024-07-22 23:15:00,262 DEBUG   SenderThread:3060771 [sender.py:send():379] send: files
+2024-07-22 23:15:00,262 INFO    SenderThread:3060771 [sender.py:_save_file():1454] saving file wandb-metadata.json with policy now
+2024-07-22 23:15:00,311 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: python_packages
+2024-07-22 23:15:00,311 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: stop_status
+2024-07-22 23:15:00,311 DEBUG   SenderThread:3060771 [sender.py:send_request():406] send_request: python_packages
+2024-07-22 23:15:00,311 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-22 23:15:00,312 DEBUG   SenderThread:3060771 [sender.py:send_request():406] send_request: stop_status
+2024-07-22 23:15:00,596 DEBUG   SenderThread:3060771 [sender.py:send():379] send: telemetry
+2024-07-22 23:15:00,908 INFO    Thread-12 :3060771 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240722_231458-c3q9vl8c/files/conda-environment.yaml
+2024-07-22 23:15:00,908 INFO    Thread-12 :3060771 [dir_watcher.py:_on_file_created():271] file/dir created: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240722_231458-c3q9vl8c/files/requirements.txt
+2024-07-22 23:15:00,908 INFO    Thread-12 :3060771 [dir_watcher.py:_on_file_created():271] file/dir created: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240722_231458-c3q9vl8c/files/output.log
+2024-07-22 23:15:00,908 INFO    Thread-12 :3060771 [dir_watcher.py:_on_file_created():271] file/dir created: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240722_231458-c3q9vl8c/files/wandb-metadata.json
+2024-07-22 23:15:00,974 INFO    wandb-upload_0:3060771 [upload_job.py:push():130] Uploaded file /tmp/tmpr5xlmi5iwandb/w4wo3gzo-wandb-metadata.json
+2024-07-22 23:15:01,076 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: partial_history
+2024-07-22 23:15:01,076 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: partial_history
+2024-07-22 23:15:01,076 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: partial_history
+2024-07-22 23:15:01,076 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: partial_history
+2024-07-22 23:15:01,076 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: partial_history
+2024-07-22 23:15:01,077 DEBUG   SenderThread:3060771 [sender.py:send():379] send: telemetry
+2024-07-22 23:15:01,317 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-22 23:15:02,312 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-22 23:15:02,908 INFO    Thread-12 :3060771 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240722_231458-c3q9vl8c/files/output.log
+2024-07-22 23:15:03,313 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-22 23:15:03,492 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: status_report
+2024-07-22 23:15:04,313 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-22 23:15:04,358 DEBUG   SenderThread:3060771 [sender.py:send():379] send: exit
+2024-07-22 23:15:04,358 INFO    SenderThread:3060771 [sender.py:send_exit():586] handling exit code: 255
+2024-07-22 23:15:04,358 INFO    SenderThread:3060771 [sender.py:send_exit():588] handling runtime: 5
+2024-07-22 23:15:04,359 INFO    SenderThread:3060771 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-07-22 23:15:04,359 INFO    SenderThread:3060771 [sender.py:send_exit():594] send defer
+2024-07-22 23:15:04,359 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: defer
+2024-07-22 23:15:04,359 INFO    HandlerThread:3060771 [handler.py:handle_request_defer():184] handle defer: 0
+2024-07-22 23:15:04,359 DEBUG   SenderThread:3060771 [sender.py:send_request():406] send_request: defer
+2024-07-22 23:15:04,359 INFO    SenderThread:3060771 [sender.py:send_request_defer():610] handle sender defer: 0
+2024-07-22 23:15:04,359 INFO    SenderThread:3060771 [sender.py:transition_state():614] send defer: 1
+2024-07-22 23:15:04,359 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: defer
+2024-07-22 23:15:04,359 INFO    HandlerThread:3060771 [handler.py:handle_request_defer():184] handle defer: 1
+2024-07-22 23:15:04,360 DEBUG   SenderThread:3060771 [sender.py:send_request():406] send_request: defer
+2024-07-22 23:15:04,360 INFO    SenderThread:3060771 [sender.py:send_request_defer():610] handle sender defer: 1
+2024-07-22 23:15:04,360 INFO    SenderThread:3060771 [sender.py:transition_state():614] send defer: 2
+2024-07-22 23:15:04,360 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: defer
+2024-07-22 23:15:04,360 INFO    HandlerThread:3060771 [handler.py:handle_request_defer():184] handle defer: 2
+2024-07-22 23:15:04,360 INFO    HandlerThread:3060771 [system_monitor.py:finish():203] Stopping system monitor
+2024-07-22 23:15:04,360 DEBUG   SystemMonitor:3060771 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-07-22 23:15:04,360 INFO    HandlerThread:3060771 [interfaces.py:finish():200] Joined cpu monitor
+2024-07-22 23:15:04,360 DEBUG   SystemMonitor:3060771 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2024-07-22 23:15:04,360 INFO    HandlerThread:3060771 [interfaces.py:finish():200] Joined disk monitor
+2024-07-22 23:15:04,361 DEBUG   SystemMonitor:3060771 [system_monitor.py:_start():183] Publishing last batch of metrics
+2024-07-22 23:15:04,403 INFO    HandlerThread:3060771 [interfaces.py:finish():200] Joined gpu monitor
+2024-07-22 23:15:04,403 INFO    HandlerThread:3060771 [interfaces.py:finish():200] Joined memory monitor
+2024-07-22 23:15:04,403 INFO    HandlerThread:3060771 [interfaces.py:finish():200] Joined network monitor
+2024-07-22 23:15:04,404 DEBUG   SenderThread:3060771 [sender.py:send_request():406] send_request: defer
+2024-07-22 23:15:04,404 INFO    SenderThread:3060771 [sender.py:send_request_defer():610] handle sender defer: 2
+2024-07-22 23:15:04,404 INFO    SenderThread:3060771 [sender.py:transition_state():614] send defer: 3
+2024-07-22 23:15:04,404 DEBUG   SenderThread:3060771 [sender.py:send():379] send: stats
+2024-07-22 23:15:04,404 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: defer
+2024-07-22 23:15:04,404 INFO    HandlerThread:3060771 [handler.py:handle_request_defer():184] handle defer: 3
+2024-07-22 23:15:04,405 DEBUG   SenderThread:3060771 [sender.py:send():379] send: history
+2024-07-22 23:15:04,405 DEBUG   SenderThread:3060771 [sender.py:send_request():406] send_request: summary_record
+2024-07-22 23:15:04,405 INFO    SenderThread:3060771 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-07-22 23:15:04,405 DEBUG   SenderThread:3060771 [sender.py:send_request():406] send_request: defer
+2024-07-22 23:15:04,405 INFO    SenderThread:3060771 [sender.py:send_request_defer():610] handle sender defer: 3
+2024-07-22 23:15:04,405 INFO    SenderThread:3060771 [sender.py:transition_state():614] send defer: 4
+2024-07-22 23:15:04,405 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: defer
+2024-07-22 23:15:04,405 INFO    HandlerThread:3060771 [handler.py:handle_request_defer():184] handle defer: 4
+2024-07-22 23:15:04,406 DEBUG   SenderThread:3060771 [sender.py:send_request():406] send_request: defer
+2024-07-22 23:15:04,406 INFO    SenderThread:3060771 [sender.py:send_request_defer():610] handle sender defer: 4
+2024-07-22 23:15:04,406 INFO    SenderThread:3060771 [sender.py:transition_state():614] send defer: 5
+2024-07-22 23:15:04,406 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: defer
+2024-07-22 23:15:04,406 INFO    HandlerThread:3060771 [handler.py:handle_request_defer():184] handle defer: 5
+2024-07-22 23:15:04,406 DEBUG   SenderThread:3060771 [sender.py:send():379] send: summary
+2024-07-22 23:15:04,406 INFO    SenderThread:3060771 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-07-22 23:15:04,406 DEBUG   SenderThread:3060771 [sender.py:send_request():406] send_request: defer
+2024-07-22 23:15:04,406 INFO    SenderThread:3060771 [sender.py:send_request_defer():610] handle sender defer: 5
+2024-07-22 23:15:04,406 INFO    SenderThread:3060771 [sender.py:transition_state():614] send defer: 6
+2024-07-22 23:15:04,406 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: defer
+2024-07-22 23:15:04,406 INFO    HandlerThread:3060771 [handler.py:handle_request_defer():184] handle defer: 6
+2024-07-22 23:15:04,406 DEBUG   SenderThread:3060771 [sender.py:send_request():406] send_request: defer
+2024-07-22 23:15:04,406 INFO    SenderThread:3060771 [sender.py:send_request_defer():610] handle sender defer: 6
+2024-07-22 23:15:04,409 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: status_report
+2024-07-22 23:15:04,639 INFO    SenderThread:3060771 [sender.py:transition_state():614] send defer: 7
+2024-07-22 23:15:04,639 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: defer
+2024-07-22 23:15:04,639 INFO    HandlerThread:3060771 [handler.py:handle_request_defer():184] handle defer: 7
+2024-07-22 23:15:04,640 DEBUG   SenderThread:3060771 [sender.py:send_request():406] send_request: defer
+2024-07-22 23:15:04,640 INFO    SenderThread:3060771 [sender.py:send_request_defer():610] handle sender defer: 7
+2024-07-22 23:15:04,909 INFO    Thread-12 :3060771 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240722_231458-c3q9vl8c/files/config.yaml
+2024-07-22 23:15:04,909 INFO    Thread-12 :3060771 [dir_watcher.py:_on_file_created():271] file/dir created: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240722_231458-c3q9vl8c/files/wandb-summary.json
+2024-07-22 23:15:05,358 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: poll_exit
+2024-07-22 23:15:05,909 INFO    Thread-12 :3060771 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240722_231458-c3q9vl8c/files/output.log
+2024-07-22 23:15:06,318 INFO    SenderThread:3060771 [sender.py:transition_state():614] send defer: 8
+2024-07-22 23:15:06,318 DEBUG   SenderThread:3060771 [sender.py:send_request():406] send_request: poll_exit
+2024-07-22 23:15:06,318 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: defer
+2024-07-22 23:15:06,318 INFO    HandlerThread:3060771 [handler.py:handle_request_defer():184] handle defer: 8
+2024-07-22 23:15:06,318 DEBUG   SenderThread:3060771 [sender.py:send_request():406] send_request: defer
+2024-07-22 23:15:06,318 INFO    SenderThread:3060771 [sender.py:send_request_defer():610] handle sender defer: 8
+2024-07-22 23:15:06,318 INFO    SenderThread:3060771 [job_builder.py:build():440] Attempting to build job artifact
+2024-07-22 23:15:06,319 INFO    SenderThread:3060771 [job_builder.py:_get_source_type():569] is repo sourced job
+2024-07-22 23:15:06,339 INFO    SenderThread:3060771 [job_builder.py:build():545] adding wandb-job metadata file
+2024-07-22 23:15:06,349 INFO    SenderThread:3060771 [sender.py:transition_state():614] send defer: 9
+2024-07-22 23:15:06,349 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: defer
+2024-07-22 23:15:06,349 INFO    HandlerThread:3060771 [handler.py:handle_request_defer():184] handle defer: 9
+2024-07-22 23:15:06,350 DEBUG   SenderThread:3060771 [sender.py:send():379] send: artifact
+2024-07-22 23:15:06,358 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: poll_exit
+2024-07-22 23:15:06,910 INFO    Thread-12 :3060771 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240722_231458-c3q9vl8c/files/output.log
+2024-07-22 23:15:07,430 INFO    SenderThread:3060771 [sender.py:send_artifact():1530] sent artifact job-https___github.com_49ball_RLMPPI.git_train.py - {'id': 'QXJ0aWZhY3Q6MTAxNjY3NDMxNw==', 'state': 'COMMITTED', 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjI3MzMxNzA5Nw==', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6MTAxNjcxNTQ5OA==', 'versionIndex': 32}}}
+2024-07-22 23:15:07,431 DEBUG   SenderThread:3060771 [sender.py:send_request():406] send_request: defer
+2024-07-22 23:15:07,431 INFO    SenderThread:3060771 [sender.py:send_request_defer():610] handle sender defer: 9
+2024-07-22 23:15:07,431 INFO    SenderThread:3060771 [dir_watcher.py:finish():358] shutting down directory watcher
+2024-07-22 23:15:07,911 INFO    SenderThread:3060771 [dir_watcher.py:finish():388] scan: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240722_231458-c3q9vl8c/files
+2024-07-22 23:15:07,911 INFO    SenderThread:3060771 [dir_watcher.py:finish():402] scan save: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240722_231458-c3q9vl8c/files/output.log output.log
+2024-07-22 23:15:07,911 INFO    SenderThread:3060771 [dir_watcher.py:finish():402] scan save: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240722_231458-c3q9vl8c/files/config.yaml config.yaml
+2024-07-22 23:15:07,911 INFO    SenderThread:3060771 [dir_watcher.py:finish():402] scan save: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240722_231458-c3q9vl8c/files/requirements.txt requirements.txt
+2024-07-22 23:15:07,912 INFO    SenderThread:3060771 [dir_watcher.py:finish():402] scan save: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240722_231458-c3q9vl8c/files/conda-environment.yaml conda-environment.yaml
+2024-07-22 23:15:07,913 INFO    SenderThread:3060771 [dir_watcher.py:finish():402] scan save: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240722_231458-c3q9vl8c/files/wandb-metadata.json wandb-metadata.json
+2024-07-22 23:15:07,917 INFO    SenderThread:3060771 [dir_watcher.py:finish():402] scan save: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240722_231458-c3q9vl8c/files/wandb-summary.json wandb-summary.json
+2024-07-22 23:15:07,920 INFO    SenderThread:3060771 [sender.py:transition_state():614] send defer: 10
+2024-07-22 23:15:07,920 DEBUG   SenderThread:3060771 [sender.py:send_request():406] send_request: poll_exit
+2024-07-22 23:15:07,921 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: defer
+2024-07-22 23:15:07,922 INFO    HandlerThread:3060771 [handler.py:handle_request_defer():184] handle defer: 10
+2024-07-22 23:15:07,922 DEBUG   SenderThread:3060771 [sender.py:send_request():406] send_request: defer
+2024-07-22 23:15:07,922 INFO    SenderThread:3060771 [sender.py:send_request_defer():610] handle sender defer: 10
+2024-07-22 23:15:07,922 INFO    SenderThread:3060771 [file_pusher.py:finish():169] shutting down file pusher
+2024-07-22 23:15:08,359 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: poll_exit
+2024-07-22 23:15:08,360 DEBUG   SenderThread:3060771 [sender.py:send_request():406] send_request: poll_exit
+2024-07-22 23:15:08,442 INFO    wandb-upload_0:3060771 [upload_job.py:push():130] Uploaded file /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240722_231458-c3q9vl8c/files/config.yaml
+2024-07-22 23:15:08,447 INFO    wandb-upload_4:3060771 [upload_job.py:push():130] Uploaded file /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240722_231458-c3q9vl8c/files/wandb-summary.json
+2024-07-22 23:15:08,470 INFO    wandb-upload_2:3060771 [upload_job.py:push():130] Uploaded file /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240722_231458-c3q9vl8c/files/requirements.txt
+2024-07-22 23:15:08,489 INFO    wandb-upload_3:3060771 [upload_job.py:push():130] Uploaded file /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240722_231458-c3q9vl8c/files/conda-environment.yaml
+2024-07-22 23:15:08,659 INFO    wandb-upload_1:3060771 [upload_job.py:push():130] Uploaded file /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240722_231458-c3q9vl8c/files/output.log
+2024-07-22 23:15:08,859 INFO    Thread-11 :3060771 [sender.py:transition_state():614] send defer: 11
+2024-07-22 23:15:08,859 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: defer
+2024-07-22 23:15:08,860 INFO    HandlerThread:3060771 [handler.py:handle_request_defer():184] handle defer: 11
+2024-07-22 23:15:08,860 DEBUG   SenderThread:3060771 [sender.py:send_request():406] send_request: defer
+2024-07-22 23:15:08,860 INFO    SenderThread:3060771 [sender.py:send_request_defer():610] handle sender defer: 11
+2024-07-22 23:15:08,860 INFO    SenderThread:3060771 [file_pusher.py:join():175] waiting for file pusher
+2024-07-22 23:15:08,861 INFO    SenderThread:3060771 [sender.py:transition_state():614] send defer: 12
+2024-07-22 23:15:08,861 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: defer
+2024-07-22 23:15:08,861 INFO    HandlerThread:3060771 [handler.py:handle_request_defer():184] handle defer: 12
+2024-07-22 23:15:08,861 DEBUG   SenderThread:3060771 [sender.py:send_request():406] send_request: defer
+2024-07-22 23:15:08,861 INFO    SenderThread:3060771 [sender.py:send_request_defer():610] handle sender defer: 12
+2024-07-22 23:15:08,861 INFO    SenderThread:3060771 [file_stream.py:finish():601] file stream finish called
+2024-07-22 23:15:09,129 INFO    SenderThread:3060771 [file_stream.py:finish():605] file stream finish is done
+2024-07-22 23:15:09,129 INFO    SenderThread:3060771 [sender.py:transition_state():614] send defer: 13
+2024-07-22 23:15:09,129 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: defer
+2024-07-22 23:15:09,129 INFO    HandlerThread:3060771 [handler.py:handle_request_defer():184] handle defer: 13
+2024-07-22 23:15:09,129 DEBUG   SenderThread:3060771 [sender.py:send_request():406] send_request: defer
+2024-07-22 23:15:09,129 INFO    SenderThread:3060771 [sender.py:send_request_defer():610] handle sender defer: 13
+2024-07-22 23:15:09,129 INFO    SenderThread:3060771 [sender.py:transition_state():614] send defer: 14
+2024-07-22 23:15:09,129 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: defer
+2024-07-22 23:15:09,130 INFO    HandlerThread:3060771 [handler.py:handle_request_defer():184] handle defer: 14
+2024-07-22 23:15:09,130 DEBUG   SenderThread:3060771 [sender.py:send():379] send: final
+2024-07-22 23:15:09,130 DEBUG   SenderThread:3060771 [sender.py:send():379] send: footer
+2024-07-22 23:15:09,130 DEBUG   SenderThread:3060771 [sender.py:send_request():406] send_request: defer
+2024-07-22 23:15:09,130 INFO    SenderThread:3060771 [sender.py:send_request_defer():610] handle sender defer: 14
+2024-07-22 23:15:09,130 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: poll_exit
+2024-07-22 23:15:09,130 DEBUG   SenderThread:3060771 [sender.py:send_request():406] send_request: poll_exit
+2024-07-22 23:15:09,130 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: server_info
+2024-07-22 23:15:09,130 DEBUG   SenderThread:3060771 [sender.py:send_request():406] send_request: server_info
+2024-07-22 23:15:09,131 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: poll_exit
+2024-07-22 23:15:09,132 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: get_summary
+2024-07-22 23:15:09,132 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: sampled_history
+2024-07-22 23:15:09,132 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-22 23:15:09,323 DEBUG   SenderThread:3060771 [sender.py:send_request():406] send_request: poll_exit
+2024-07-22 23:15:09,323 DEBUG   HandlerThread:3060771 [handler.py:handle_request():158] handle_request: shutdown
+2024-07-22 23:15:09,323 INFO    HandlerThread:3060771 [handler.py:finish():882] shutting down handler
+2024-07-22 23:15:10,132 INFO    WriterThread:3060771 [datastore.py:close():296] close: /home/jeongtae/RLMPPI/src/logs/car/1/wandb/run-20240722_231458-c3q9vl8c/run-c3q9vl8c.wandb
+2024-07-22 23:15:10,323 INFO    SenderThread:3060771 [sender.py:finish():1608] shutting down sender
+2024-07-22 23:15:10,323 INFO    SenderThread:3060771 [file_pusher.py:finish():169] shutting down file pusher
+2024-07-22 23:15:10,323 INFO    SenderThread:3060771 [file_pusher.py:join():175] waiting for file pusher
