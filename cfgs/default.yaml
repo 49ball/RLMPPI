@@ -1,5 +1,5 @@
 #project
-project : "test"
+project : "obstacle change"
 
 # environment
 task: car
@@ -41,6 +41,7 @@ tau: 0.01
 # architecture
 mlp_dim: 512
 state_dim: 4
+obstacle_dim:
 
 # wandb (insert your own)
 use_wandb: true

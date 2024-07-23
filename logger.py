@@ -73,10 +73,10 @@ class CarAnimationRecorder:
 		self.states = []
 		self.enabled = enabled
 
-	def record(self, state):
+	def record(self, state, obstacles):
 		if self.enabled:
 			fig, ax = plt.subplots(figsize=(10, 10))
-			self.map_obj.plot_map(ax)
+			self.map_obj.plot_map(ax, obstacles)
 			car_marker = Rectangle((0, 0), width=self.car_length, height=self.car_width, fc='red', ec='black', angle=0)
 			ax.add_patch(car_marker)
 			line, = ax.plot([], [], 'b-', label='Path of the car')

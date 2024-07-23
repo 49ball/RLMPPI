@@ -8,7 +8,7 @@ import numpy as np
 import time
 import random
 from pathlib import Path
-from environment import make_env, MapWithObstacles
+from environment import Env, MapWithObstacles
 import logger
 from cfg import parse_cfg #바꿔야 할 부분
 from algorithm.tdmpc import TDMPC
@@ -32,12 +32,11 @@ def evaluate(env, agent, num_episodes, step, env_step, eval_numbering, cfg, vide
 	for i in range(num_episodes):
 		temp_name = f'states_and_obstacles_{eval_numbering}_{i}.csv'
 		temp_file_path = os.path.join(directory, temp_name)
-		obs = MapWithObstacles()
 		states = []
 		with open(temp_file_path, mode='w', newline='') as temp_file:
 			writer = csv.writer(temp_file, delimiter='\t')
-			s, done, ep_reward, t = env.reset(), False, 0, 0
-			obstacle_str = ','.join(f'({x},{y})' for x, y in obs.obstacles)
+			s, done, ep_reward, t = env.reset(1), False, 0, 0
+			obstacle_str = ','.join(f'({x},{y})' for x, y in env.map.obstacles)
 			writer.writerow([obstacle_str])
 			states.append(s.tolist())  # 초기 상태 저장
 			if video: video.init(enabled=(i==0))
@@ -46,7 +45,7 @@ def evaluate(env, agent, num_episodes, step, env_step, eval_numbering, cfg, vide
 				s, reward, done, _ = env.step(action)
 				states.append(s.tolist())  # 상태를 메모리에 저장
 				ep_reward += reward
-				if video: video.record(s)
+				if video: video.record(s, env.map.obstacles)
 				t += 1
 			writer.writerows(states)  # 모든 상태를 한 번에 파일에 저장		
 		# 에피소드가 끝난 후 파일 이름을 변경하여 보상을 포함
@@ -87,11 +86,11 @@ def train(cfg):
 	eval_numbering=0
 	work_dir = Path().cwd() / __LOGS__ / cfg.task / str(cfg.seed)
 	eval_dir = Path().cwd() / __LOGS__ / cfg.task / 'eval' / str(cfg.project)
-	env,agent,buffer=make_env(cfg),TDMPC(cfg),ReplayBuffer(cfg)
+	env,agent,buffer=Env.make_env(cfg),TDMPC(cfg),ReplayBuffer(cfg)
 	L=logger.Logger(work_dir, eval_dir, cfg) #로거 시작, wandb 연결
 	episode_idx, start_time = 0, time.time() #훈련 에피소드 인덱스와 시작시간 초기화
 	for step in range(0, cfg.train_steps+cfg.episode_length,cfg.episode_length):
-		s=env.reset() #s 초기화
+		s=env.reset(int(step*cfg.action_repeat)) #s 초기화
 		episode=Episode(cfg,s) #여기서 s는 state차원과 action 차원을 보내줘야함
 		while not episode.done:
 			action = agent.plan(s,step=step,t0=episode.first)
@@ -135,7 +134,8 @@ def train(cfg):
 		if env_step % cfg.eval_freq == 0:
 			common_metrics['episode_reward'] = evaluate(env, agent, cfg.eval_episodes, step, env_step ,eval_numbering, cfg, L.video)
 			eval_numbering+=1
-			L.log(common_metrics, category='eval') 
+			L.log(common_metrics, category='eval')
+		env.obs_reset(int(step*cfg.action_repeat)) 
 
 	L.finish(agent) #끝나는 프린트 구문
 	print('Training completed successfully')

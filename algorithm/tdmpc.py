@@ -12,8 +12,8 @@ class TOLD(nn.Module):
 		super().__init__()
 		self.cfg = cfg
 		self._dynamics=KinematicBicycleModel()
-		self._reward = h.mlp(cfg.state_dim+cfg.action_dim, cfg.mlp_dim, 1)
-		self._pi = h.mlp(cfg.state_dim, cfg.mlp_dim, cfg.action_dim)
+		self._reward = h.mlp(cfg.state_dim+cfg.action_dim, cfg.mlp_dim, 1) 
+		self._pi = h.mlp(cfg.state_dim, cfg.mlp_dim, cfg.action_dim) #obstacle information add
 		self._Q1, self._Q2 = h.q(cfg), h.q(cfg)
 		self.apply(h.orthogonal_init)
 		for m in [self._reward, self._Q1, self._Q2]:
@@ -30,7 +30,7 @@ class TOLD(nn.Module):
 		x = torch.cat([s, a], dim=-1)
 		return self._dynamics.update(s,a), self._reward(x) #mlp로 뽑아낸 값들
 
-	def pi(self, s, std=0): #policy로부터 sampling, 평균 반환
+	def pi(self, s, std=0): #policy로부터 sampling, 평균 반환   -> obstacle information add
 		"""Samples an action from the learned policy (pi)."""
 		mu = torch.tanh(self._pi(s)) #행동공간 정규화
 		if std > 0:
