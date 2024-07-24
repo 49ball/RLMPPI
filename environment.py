@@ -23,11 +23,7 @@ class MapWithObstacles:
 
     def generate_obstacles(self):
         # 지정된 위치에 장애물 생성
-        self.obstacles = [
-            (20, 20), (40, 20), (45, 40), (60, 60), (50, 80),
-            (25, 35), (30, 70), (50, 30), (70, 45), (50, 65),
-            (80, 60), (30, 50), (70, 30), (60, 40), (90, 50)    
-        ]
+        self.obstacles = []
 
     def plot_map(self):
         fig, ax = plt.subplots(figsize=(10, 10))
@@ -50,55 +46,39 @@ class MapWithObstacles:
         if len(prev_states.shape)==1:
             prev_states = prev_states.reshape(1,-1)
         
-        prev_states=torch.tensor(prev_states,dtype=torch.float32,device='cuda')
+        prev_states = torch.tensor(prev_states,dtype=torch.float32,device='cuda')
         states = torch.tensor(states, dtype=torch.float32, device='cuda')
-        prev_x, prev_y, prev_v = prev_states[:, 0], prev_states[:, 1], prev_states[:, 3]
-        x, y, v = states[:, 0], states[:, 1], states[:, 3]
+        prev_x, prev_y, prev_yaw, prev_v = prev_states[:, 0], prev_states[:, 1], prev_states[:, 2], prev_states[:, 3]
+        x, y, yaw, v = states[:, 0], states[:, 1], states[:, 2], states[:, 3]
         goal = torch.tensor([100, 100], dtype=torch.float32, device='cuda')
-        max_reward= 1.42
         
-        k_att = 10.0
-        k_obs = 50.0
-        sigma_x = 4.0  # 수렴 계수
-        sigma_y = 4.0  # 수렴 계수
+        done = False
+        
+        max_reward = 10.0
+        max_velocity = 10.0
+        min_velocity = 1.0
 
-        # 목표 지점관련 리워드
-        prev_distance_to_goal=torch.sqrt((prev_x-goal[0])**2+(prev_y-goal[1])**2)
+        # destination reward
+        prev_distance_to_goal = torch.sqrt((prev_x-goal[0])**2+(prev_y-goal[1])**2)
         distance_to_goal = torch.sqrt((x - goal[0])**2 + (y - goal[1])**2)
-        reward = (prev_distance_to_goal-distance_to_goal)
+        reward = prev_distance_to_goal - distance_to_goal
 
-        # if (prev_distance_to_goal-distance_to_goal)==0:
-        #     reward = torch.tensor(-1.0, dtype=torch.float32, device='cuda')
-            
-        # reward = -distance_to_goal*0.01
-        # reward = k_att*reward
-        done = False     
-        # 장애물간의 거리를 계산한 리워드
-        obstacles = torch.tensor(self.obstacles, dtype=torch.float32, device='cuda')
-        obs_x = obstacles[:, 0].view(1, -1)
-        obs_y = obstacles[:, 1].view(1, -1)
-        # distance_to_obstacles = ((x.view(-1, 1) - obs_x)**2 + (y.view(-1, 1) - obs_y)**2).clone().detach()
-        # Cost = torch.exp(-(((x.view(-1, 1) - obs_x)**2 / sigma_x**2) + ((y.view(-1, 1) - obs_y)**2 / sigma_y**2)))
-        # reward -= k_obs * torch.sum(Cost, dim=1)*0.01
-
-        #차량 속도와 관련된 리워드
-       # speed_reward = torch.clamp(v / 3.0, 0.0, 1.0) #속도 리워드 정규화(0에서3)
-        # speed_reward = 0.0
-        # if v < 0.0:
-        #     speed_reward=-1
-        # elif v > 1.0:
-        #     speed_reward = 0.1
-        # reward += speed_reward
-
-        # if torch.any(distance_to_obstacles < 3.5, dim=1): #차가 장애물과의 거리가 너무 가까울땐 중단
-        #     done =True
-
-        if distance_to_goal <=0.5: #차가 목표지점에 도착했을때
-            reward = torch.tensor(10.0, dtype=torch.float32, device='cuda')
+        # velocity reward
+        speed_reward = 1 - v / max_velocity
+        
+        reward += speed_reward
+        
+        # heading reward
+        heading_reward = 1 - yaw / (pi/4)
+        
+        reward += heading_reward
+        
+        if distance_to_goal <= 0.2:
+            reward = torch.tensor(max_reward, dtype=torch.float32, device='cuda')
             done = True
 
         elif torch.any(x < 0) or torch.any(x > 100) or torch.any(y < 0) or torch.any(y > 100): #차가 경계선 밖을 나갈때
-            reward = torch.tensor(-5.0, dtype=torch.float32, device='cuda')
+            reward = torch.tensor(-max_reward, dtype=torch.float32, device='cuda')
             done = True
 
         return reward.cpu().numpy().item(), done
@@ -109,7 +89,7 @@ class Env(object):
         self.state = torch.tensor([x, y, yaw, velocity], dtype=torch.float32, device='cuda')
         self.shape = self.state.shape  # 관찰 공간의 형태 (x, y, yaw, velocity)
         self.action_space = (2,)  # 액션 공간의 형태 (acceleration, steering_angle)
-        self.map=MapWithObstacles()
+        self.map = MapWithObstacles()
         self.ep_len = 1000 // action_repeat
         self.model = KinematicBicycleModel()
         self.t = 0

@@ -19,11 +19,7 @@ class MapWithObstacles:
 
     def generate_obstacles(self):
         # 지정된 위치에 장애물 생성
-        self.obstacles = [
-            (20, 20), (40, 20), (45, 40), (60, 60), (50, 80),
-            (25, 35), (30, 70), (50, 30), (70, 45), (50, 65),
-            (80, 60), (30, 50), (70, 30), (60, 40), (90, 50)
-        ]
+        self.obstacles = []
 
     def plot_map(self, ax):
         ax.set_xlim(0, self.map_size)
@@ -85,7 +81,7 @@ class CarAnimation:
 car_length = 3.0  # 차량의 길이(미터)
 car_width = 1.5   # 차량의 너비(미터)
 dt = 0.1  # 시간 간격(초)
-csv_file = './logs/car/eval/test2/3/states_3_4_(134).csv'  # 입력 데이터 파일 경로
+csv_file = '/home/a5t1_test3/munkyung/RLMPPI/logs/car/eval/test2/21/states_21_2_(20).csv'  # 입력 데이터 파일 경로
 
 # 맵 생성
 map_with_obstacles = MapWithObstacles()
